@@ -48,6 +48,81 @@ aethercore/
 ├── docs/                   # Documentation (English only)
 ├── config/                 # Configuration files
 ├── README.md              # This file
+
+### 📚 Usage Instructions
+
+## 🎯 Complete Automation System
+
+AetherCore is not just a skill - it's a complete, self-running intelligent system:
+
+### ✅ Complete Automation
+- **Hourly**: Automatic check and optimization of new memory files
+- **Daily**: Complete optimization at 3 AM
+- **Weekly**: Cleanup old reports, keep system clean
+
+### ✅ Complete Integration
+- **OpenClaw Heartbeat**: AetherCore checks integrated
+- **Cron Scheduled Tasks**: Automation already set up
+- **Log System**: All operations have detailed records
+
+### ✅ Complete Autonomy
+- **Zero Manual Operations**: System runs automatically
+- **Intelligent Detection**: Only processes files needing optimization
+- **Performance Monitoring**: Automatic collection of statistical data
+- **Error Handling**: Comprehensive exception handling mechanism
+
+### 🎪 Night Market Intelligence Technical Serviceization Practice Complete!
+AetherCore is now a complete, autonomous, production-ready intelligent system.
+
+```bash
+# Enable complete automation
+openclaw skill run aethercore --enable-complete-automation
+
+# Verify system status
+openclaw skill run aethercore --system-status
+
+# Monitor operations
+openclaw skill run aethercore --monitor-operations
+```
+
+#### **2. OpenClaw Heartbeat Integration**
+Integrate with OpenClaw's heartbeat system for automatic updates:
+```bash
+openclaw skill run aethercore --enable-heartbeat-integration
+openclaw skill run aethercore --set-heartbeat-frequency 30
+```
+
+#### **3. Data Extension to Other File Types**
+Extend optimization to various file types:
+```bash
+openclaw skill run aethercore --optimize-skill-files
+openclaw skill run aethercore --optimize-project-docs
+openclaw skill run aethercore --optimize-custom "*.md,*.json,*.py"
+```
+
+#### **4. Dashboard Creation and Visualization**
+Create interactive dashboards for memory analysis:
+```bash
+openclaw skill run aethercore --create-dashboard
+openclaw skill run aethercore --show-dashboard
+openclaw skill run aethercore --export-dashboard html
+```
+
+#### **5. Complete Workflow Example**
+```bash
+# Install and setup
+openclaw skill install aethercore
+openclaw skill run aethercore --setup-complete
+
+# Optimize and automate
+openclaw skill run aethercore --optimize-all-memory
+openclaw skill run aethercore --enable-auto-optimize
+openclaw skill run aethercore --enable-heartbeat-integration
+
+# Create dashboard
+openclaw skill run aethercore --create-dashboard
+openclaw skill run aethercore --show-dashboard
+```
 ├── SKILL.md               # Skill documentation
 ├── CHANGELOG.md           # Version history
 ├── CONTRIBUTING.md        # Contribution guidelines

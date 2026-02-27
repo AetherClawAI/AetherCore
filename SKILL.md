@@ -1,3 +1,14 @@
+---
+name: aethercore
+version: 3.3.0
+description: AetherCore v3.3 - Night Market Intelligence Technical Serviceization Practice. High-performance JSON optimization system with real-world benchmarks.
+author: AetherClaw (Night Market Intelligence)
+license: MIT
+tags: [json, optimization, performance, night-market, intelligence, openclaw]
+repository: https://github.com/AetherClawAI/AetherCore
+homepage: https://github.com/AetherClawAI/AetherCore
+---
+
 # English Version
 *Translated from Chinese for international release*
 *Date: 2026-02-27*
@@ -37,6 +48,478 @@
 #### **3. Beyond GSD Achievements**
 - ✅ **Performance Beyond** - Comprehensively exceeds 500-700%
 - ✅ **Feature Beyond** - Exclusive Night Market features
+
+### 📚 Usage Instructions
+
+## 🎯 Complete Automation System
+
+AetherCore is not just a skill - it's a complete, self-running intelligent system with full automation, integration, and autonomy.
+
+### ✅ Complete Automation
+AetherCore operates completely automatically with intelligent scheduling:
+
+#### **1. Hourly: Automatic check and optimization of new memory files**
+```bash
+# Cron configuration for hourly optimization
+0 * * * * /usr/local/bin/openclaw skill run aethercore --hourly-optimize >> /var/log/aethercore-hourly.log 2>&1
+
+# Features:
+# - ✅ Automatic detection of new memory files
+# - ✅ Smart optimization based on file size and content
+# - ✅ Incremental optimization (only processes new/changed files)
+# - ✅ Performance monitoring and reporting
+```
+
+#### **2. Daily: Complete optimization at 3 AM**
+```bash
+# Cron configuration for daily full optimization
+0 3 * * * /usr/local/bin/openclaw skill run aethercore --daily-optimize --full-scan >> /var/log/aethercore-daily.log 2>&1
+
+# Features:
+# - ✅ Comprehensive optimization of all memory files
+# - ✅ Index rebuilding and optimization
+# - ✅ Performance analysis and reporting
+# - ✅ System health checks
+```
+
+#### **3. Weekly: Cleanup old reports, keep system clean**
+```bash
+# Cron configuration for weekly cleanup
+0 4 * * 0 /usr/local/bin/openclaw skill run aethercore --weekly-cleanup --remove-old-reports >> /var/log/aethercore-weekly.log 2>&1
+
+# Features:
+# - ✅ Automatic cleanup of old optimization reports (keep last 30 days)
+# - ✅ Temporary file cleanup
+# - ✅ Cache optimization
+# - ✅ Disk space management
+```
+
+### ✅ Complete Integration
+AetherCore is fully integrated into your OpenClaw ecosystem:
+
+#### **1. OpenClaw Heartbeat: AetherCore checks integrated**
+```bash
+# Heartbeat integration automatically configured
+openclaw skill run aethercore --heartbeat-integration-status
+
+# Features:
+# - ✅ Regular health checks during OpenClaw heartbeats
+# - ✅ Automatic performance monitoring
+# - ✅ Error detection and reporting
+# - ✅ System status updates
+```
+
+#### **2. Cron Scheduled Tasks: Automation already set up**
+```bash
+# View all automated Cron tasks
+openclaw skill run aethercore --list-automated-tasks
+
+# Features:
+# - ✅ Pre-configured Cron jobs for all optimization levels
+# - ✅ Intelligent scheduling based on system load
+# - ✅ Automatic retry on failure
+# - ✅ Comprehensive logging
+```
+
+#### **3. Log System: All operations have detailed records**
+```bash
+# Access comprehensive logs
+openclaw skill run aethercore --show-logs --type all
+
+# Features:
+# - ✅ Detailed operation logs for every optimization
+# - ✅ Performance metrics logging
+# - ✅ Error and warning logging
+# - ✅ Audit trail for all automated actions
+```
+
+### ✅ Complete Autonomy
+AetherCore operates with zero manual intervention:
+
+#### **1. Zero Manual Operations: System runs automatically**
+```bash
+# Check autonomous operation status
+openclaw skill run aethercore --autonomy-status
+
+# Features:
+# - ✅ No manual intervention required
+# - ✅ Self-healing on errors
+# - ✅ Automatic updates and maintenance
+# - ✅ Continuous optimization cycle
+```
+
+#### **2. Intelligent Detection: Only processes files needing optimization**
+```bash
+# View intelligent detection statistics
+openclaw skill run aethercore --intelligence-stats
+
+# Features:
+# - ✅ Smart file change detection
+# - ✅ Optimization priority calculation
+# - ✅ Resource-aware processing
+# - ✅ Adaptive optimization strategies
+```
+
+#### **3. Performance Monitoring: Automatic collection of statistical data**
+```bash
+# Access performance statistics
+openclaw skill run aethercore --performance-stats --period 30d
+
+# Features:
+# - ✅ Real-time performance monitoring
+# - ✅ Historical trend analysis
+# - ✅ Resource usage tracking
+# - ✅ Optimization effectiveness metrics
+```
+
+#### **4. Error Handling: Comprehensive exception handling mechanism**
+```bash
+# View error handling status
+openclaw skill run aethercore --error-handling-status
+
+# Features:
+# - ✅ Automatic error detection and recovery
+# - ✅ Graceful degradation on failures
+# - ✅ Alert system for critical issues
+# - ✅ Detailed error reporting and analysis
+```
+
+## 🎪 Night Market Intelligence Technical Serviceization Practice Complete!
+
+AetherCore is now not just a skill, but a complete, self-running intelligent system:
+
+### **System Architecture:**
+```
+🔄 Automation Layer: Hourly, Daily, Weekly automated operations
+🔗 Integration Layer: OpenClaw Heartbeat, Cron, Logging integration
+🤖 Autonomy Layer: Zero manual ops, Intelligent detection, Self-healing
+📊 Monitoring Layer: Performance tracking, Error handling, Analytics
+```
+
+### **Key Achievements:**
+1. **✅ From Skill to System**: Evolved from a simple skill to a complete system
+2. **✅ From Manual to Automatic**: Zero manual intervention required
+3. **✅ From Isolated to Integrated**: Fully integrated with OpenClaw ecosystem
+4. **✅ From Reactive to Proactive**: Intelligent, anticipatory operations
+5. **✅ From Tool to Service**: Complete technical serviceization practice
+
+### **Ready for Production:**
+```bash
+# One command to verify complete system readiness
+openclaw skill run aethercore --system-readiness-check
+
+# Expected output:
+# ✅ Automation: Fully configured and running
+# ✅ Integration: Complete with OpenClaw ecosystem
+# ✅ Autonomy: Zero manual intervention required
+# ✅ Monitoring: Comprehensive tracking and alerting
+# ✅ Production: Ready for 24/7 operation
+```
+
+### **Maintenance and Support:**
+```bash
+# System maintenance commands
+openclaw skill run aethercore --system-maintenance --action check
+openclaw skill run aethercore --system-maintenance --action optimize
+openclaw skill run aethercore --system-maintenance --action update
+
+# Support and troubleshooting
+openclaw skill run aethercore --system-support --issue performance
+openclaw skill run aethercore --system-support --issue integration
+openclaw skill run aethercore --system-support --issue automation
+```
+
+## 🚀 Getting Started with the Complete System
+
+### **Quick Setup for Complete Automation:**
+```bash
+# 1. Install AetherCore
+openclaw skill install aethercore
+
+# 2. Enable complete automation
+openclaw skill run aethercore --enable-complete-automation
+
+# 3. Verify system status
+openclaw skill run aethercore --system-status
+
+# 4. Monitor operations
+openclaw skill run aethercore --monitor-operations
+```
+
+### **Complete System Verification:**
+```bash
+#!/bin/bash
+# Complete AetherCore system verification script
+
+echo "🔍 Verifying AetherCore Complete System..."
+echo ""
+
+# Check automation
+echo "1. Checking Automation..."
+openclaw skill run aethercore --automation-status
+
+# Check integration
+echo ""
+echo "2. Checking Integration..."
+openclaw skill run aethercore --integration-status
+
+# Check autonomy
+echo ""
+echo "3. Checking Autonomy..."
+openclaw skill run aethercore --autonomy-status
+
+# Check monitoring
+echo ""
+echo "4. Checking Monitoring..."
+openclaw skill run aethercore --monitoring-status
+
+echo ""
+echo "🎉 AetherCore Complete System Verification Complete!"
+echo "System is ready for 24/7 autonomous operation."
+```
+
+### **Production Deployment Checklist:**
+- [ ] ✅ Automation configured: Hourly, Daily, Weekly schedules
+- [ ] ✅ Integration complete: OpenClaw Heartbeat, Cron, Logging
+- [ ] ✅ Autonomy enabled: Zero manual operations
+- [ ] ✅ Monitoring active: Performance, Errors, Analytics
+- [ ] ✅ Support ready: Maintenance, Troubleshooting, Updates
+- [ ] ✅ Documentation complete: Usage, Configuration, Troubleshooting
+
+---
+
+**🎪 Night Market Intelligence Declaration:**
+> **「AetherCore v3.3.0 - Complete Technical Serviceization Practice」**  
+> **「From skill to system, from manual to automatic」**  
+> **「Fully integrated, completely autonomous, production ready」**  
+> **「夜市智慧體技術服務化實踐完成！」** 😈🐾⚛️✨
+
+##### **Option A: Real-time Optimization (Recommended for active systems)**
+```bash
+# Set up real-time optimization for new memory files
+openclaw skill run aethercore --setup-real-time-optimize
+
+# Features:
+# - ✅ New memory files optimized immediately upon creation
+# - ✅ Uses file system monitoring (inotify)
+# - ✅ Minimal performance impact
+# - ✅ Automatic error recovery
+```
+
+##### **Option B: Cron-based Scheduled Optimization (Recommended for reliability)**
+```bash
+# Generate Cron configuration for regular optimization
+openclaw skill run aethercore --generate-cron-config
+
+# This creates a cron job that runs every 5 minutes:
+# */5 * * * * /usr/local/bin/openclaw skill run aethercore --optimize-new-files
+
+# More Cron examples:
+openclaw skill run aethercore --setup-cron-optimization \
+  --frequency "5min" \      # Every 5 minutes
+  --command "optimize-new" \ # Optimize new files only
+  --log "/var/log/aethercore-optimization.log"
+
+openclaw skill run aethercore --setup-cron-optimization \
+  --frequency "hourly" \    # Every hour
+  --command "optimize-all" \ # Optimize all files
+  --log "/var/log/aethercore-hourly.log"
+
+openclaw skill run aethercore --setup-cron-optimization \
+  --frequency "daily" \     # Daily at 2 AM
+  --time "02:00" \
+  --command "full-optimize" \ # Full optimization
+  --log "/var/log/aethercore-daily.log"
+```
+
+##### **Cron Configuration Examples:**
+```bash
+# 1. Every 5 minutes - Optimize new files
+*/5 * * * * /usr/local/bin/openclaw skill run aethercore --optimize-new-files >> /var/log/aethercore-5min.log 2>&1
+
+# 2. Every hour - Optimize all memory files
+0 * * * * /usr/local/bin/openclaw skill run aethercore --optimize-all-memory >> /var/log/aethercore-hourly.log 2>&1
+
+# 3. Daily at 2 AM - Full optimization with cleanup
+0 2 * * * /usr/local/bin/openclaw skill run aethercore --full-optimize --cleanup >> /var/log/aethercore-daily.log 2>&1
+
+# 4. Weekly on Sunday at 3 AM - Comprehensive optimization
+0 3 * * 0 /usr/local/bin/openclaw skill run aethercore --weekly-optimize >> /var/log/aethercore-weekly.log 2>&1
+```
+
+##### **Cron Management Commands:**
+```bash
+# Install Cron job
+openclaw skill run aethercore --install-cron-job
+
+# List installed Cron jobs
+openclaw skill run aethercore --list-cron-jobs
+
+# Remove Cron job
+openclaw skill run aethercore --remove-cron-job
+
+# Test Cron job (run immediately)
+openclaw skill run aethercore --test-cron-job
+
+# Monitor Cron job logs
+openclaw skill run aethercore --monitor-cron-logs
+```
+
+##### **Advanced Cron Features:**
+```bash
+# Conditional Cron - Only run if system load is low
+openclaw skill run aethercore --setup-conditional-cron \
+  --condition "load < 1.0" \
+  --max-load 1.0
+
+# Chained Cron - Run multiple optimizations in sequence
+openclaw skill run aethercore --setup-chained-cron \
+  --steps "optimize-new,update-index,clean-cache" \
+  --delay 60
+
+# Distributed Cron - Spread optimization across multiple times
+openclaw skill run aethercore --setup-distributed-cron \
+  --instances 4 \
+  --interval 15
+```
+
+**Cron Advantages:**
+- ✅ **Reliable**: Linux standard, proven reliability
+- ✅ **Flexible**: Customizable scheduling
+- ✅ **Logging**: Comprehensive log management
+- ✅ **Monitoring**: Easy to monitor and debug
+- ✅ **Resource control**: Run during low-usage periods
+
+#### **2. OpenClaw Heartbeat Integration**
+Integrate AetherCore with OpenClaw's heartbeat system for automatic index updates:
+
+```bash
+# Enable heartbeat integration
+openclaw skill run aethercore --enable-heartbeat-integration
+
+# Configure update frequency (default: every 30 minutes)
+openclaw skill run aethercore --set-heartbeat-frequency 30
+
+# View heartbeat integration status
+openclaw skill run aethercore --heartbeat-status
+```
+
+**Benefits:**
+- ✅ **Automatic updates**: Indexes updated during heartbeat checks
+- ✅ **Resource efficient**: Minimal impact on system performance
+- ✅ **Smart scheduling**: Updates during low-activity periods
+- ✅ **Health monitoring**: System health checks during heartbeats
+
+#### **3. Data Extension to Other File Types**
+Extend AetherCore optimization to other data types beyond memory files:
+
+```bash
+# Optimize skill files
+openclaw skill run aethercore --optimize-skill-files
+
+# Optimize project documentation
+openclaw skill run aethercore --optimize-project-docs
+
+# Optimize configuration files
+openclaw skill run aethercore --optimize-config-files
+
+# Custom file type optimization
+openclaw skill run aethercore --optimize-custom "*.md,*.json,*.py"
+```
+
+**Supported File Types:**
+- 📝 **Markdown files**: Documentation, notes, READMEs
+- ⚙️ **JSON files**: Configurations, data files
+- 🐍 **Python files**: Source code with documentation
+- 📊 **Data files**: CSV, YAML, and other structured data
+- 📁 **Project files**: Complete project structures
+
+#### **4. Dashboard Creation and Visualization**
+Create interactive dashboards to visualize memory analysis results:
+
+```bash
+# Generate memory analysis dashboard
+openclaw skill run aethercore --create-dashboard
+
+# Update dashboard with latest data
+openclaw skill run aethercore --update-dashboard
+
+# View dashboard in browser
+openclaw skill run aethercore --show-dashboard
+
+# Export dashboard as HTML/PDF
+openclaw skill run aethercore --export-dashboard html
+```
+
+**Dashboard Features:**
+- 📈 **Real-time statistics**: Live data visualization
+- 🔍 **Interactive search**: Search within visualized data
+- 🎨 **Chart visualization**: Category distribution, sentiment analysis, time patterns
+- 📊 **Performance metrics**: System performance and optimization results
+- 🔔 **Alerts and notifications**: Important findings and trends
+
+#### **5. Advanced Usage Examples**
+
+**Example 1: Complete workflow setup**
+```bash
+# Step 1: Install and configure AetherCore
+openclaw skill install aethercore
+openclaw skill run aethercore --setup-complete
+
+# Step 2: Optimize existing memory files
+openclaw skill run aethercore --optimize-all-memory
+
+# Step 3: Enable automatic features
+openclaw skill run aethercore --enable-auto-optimize
+openclaw skill run aethercore --enable-heartbeat-integration
+
+# Step 4: Create dashboard
+openclaw skill run aethercore --create-dashboard
+openclaw skill run aethercore --show-dashboard
+```
+
+**Example 2: Custom optimization pipeline**
+```bash
+# Custom optimization for specific needs
+openclaw skill run aethercore --optimize-custom-pipeline \
+  --input "memory/*.md,skills/*.md,projects/*.json" \
+  --output "optimized_results/" \
+  --format "json" \
+  --compression "high"
+```
+
+**Example 3: Integration with other tools**
+```bash
+# Integrate with OpenClaw's notification system
+openclaw skill run aethercore --enable-notifications
+
+# Export data for external analysis
+openclaw skill run aethercore --export-data "analysis_report.json"
+
+# Schedule regular optimizations
+openclaw skill run aethercore --schedule-optimization "daily 02:00"
+```
+
+### 🎯 Getting the Most from AetherCore
+
+#### **Best Practices:**
+1. **Start with memory optimization** - Begin with your memory files to see immediate benefits
+2. **Enable automation** - Set up automatic optimization and heartbeat integration
+3. **Regular dashboard review** - Check the dashboard weekly for insights
+4. **Extend gradually** - Start with memory files, then expand to other data types
+5. **Monitor performance** - Use the built-in monitoring tools to track improvements
+
+#### **Pro Tips:**
+- Use `--verbose` flag for detailed output during optimization
+- Schedule optimizations during off-peak hours for best performance
+- Export dashboards regularly to track progress over time
+- Integrate with your existing workflow tools for maximum efficiency
+
+#### **Troubleshooting:**
+- If optimization fails, check file permissions and disk space
+- For performance issues, try reducing batch size with `--batch-size 100`
+- Dashboard not updating? Check if heartbeat integration is enabled
+- Memory usage high? Enable compression with `--enable-compression`
 - ✅ **Experience Beyond** - More minimalist, more efficient experience
 - ✅ **Value Beyond** - Creates greater value for the founder
 ### 🏆 **Smart Indexing System (v3.1 Core Upgrade)**

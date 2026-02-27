@@ -406,4 +406,18 @@ handle_error() {
     echo "  1. Check package manager and install missing tools"
     echo "  2. Check disk space and permissions"
     echo "  3. Check SELinux/AppArmor if applicable"
-    echo
+    echo "  4. Check network connectivity"
+    echo "  5. Try user-friendly installer (no sudo):"
+    echo "     curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-linux-user.sh | bash"
+    echo "  6. Try universal installer:"
+    echo "     curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-universal.sh | bash"
+    exit $error_code
+}
+
+# Set error trap
+trap handle_error ERR
+
+# Start Linux-optimized installation
+main_installation_linux
+
+exit 0

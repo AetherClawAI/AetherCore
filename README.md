@@ -35,6 +35,9 @@ curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install
 # Linux-optimized installation
 curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-linux.sh | bash
 
+# Linux user-friendly installation (no sudo required)
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-linux-user.sh | bash
+
 # Universal installation (any platform)
 curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-universal.sh | bash
 ```

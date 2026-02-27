@@ -152,6 +152,9 @@ install_dependencies() {
 copy_files() {
     log "📄 Copying files to installation directory..."
     
+    # Ensure we're in the temp directory
+    cd "$TEMP_DIR" || error "Failed to enter temp directory for file copying"
+    
     # Simple and reliable cross-platform copying
     # Use cp -R for recursive copying (works on both macOS and Linux)
     log "Using simple recursive copy for cross-platform compatibility..."

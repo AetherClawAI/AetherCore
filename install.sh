@@ -152,22 +152,25 @@ install_dependencies() {
 copy_files() {
     log "📄 Copying files to installation directory..."
     
-    # Cross-platform file copying (works on both macOS and Linux)
-    # Method 1: Use rsync if available (best option)
-    if command -v rsync &> /dev/null; then
-        log "Using rsync for cross-platform file copying..."
-        rsync -av --exclude='.git' --exclude='.git/*' . "$INSTALL_DIR/" 2>/dev/null || warning "Some files may not have copied correctly"
-    # Method 2: Use tar for cross-platform compatibility
-    elif command -v tar &> /dev/null; then
-        log "Using tar for cross-platform file copying..."
-        tar cf - --exclude='.git' --exclude='.git/*' . | (cd "$INSTALL_DIR" && tar xf -) 2>/dev/null || warning "Some files may not have copied correctly"
-    # Method 3: Manual copying for macOS compatibility
+    # Simple and reliable cross-platform copying
+    # Use cp -R for recursive copying (works on both macOS and Linux)
+    log "Using simple recursive copy for cross-platform compatibility..."
+    
+    # Copy all files and directories except .git
+    if cp -R . "$INSTALL_DIR" 2>/dev/null; then
+        # Remove .git directory if it was copied
+        rm -rf "$INSTALL_DIR/.git" 2>/dev/null || true
     else
-        log "Using manual copying for macOS compatibility..."
-        # Create directory structure first
-        find . -type d -not -name ".git" -not -path "./.git/*" -exec mkdir -p "$INSTALL_DIR/{}" \; 2>/dev/null
-        # Copy files individually
-        find . -type f -not -path "./.git/*" -exec sh -c 'cp "$1" "$2/$(dirname "$1")/" 2>/dev/null' _ {} "$INSTALL_DIR" \; || warning "Some files may not have copied correctly"
+        # Fallback: copy files individually
+        warning "Recursive copy failed, using fallback method..."
+        # Create all directories first
+        find . -type d -not -name ".git" -not -path "./.git/*" | while read dir; do
+            mkdir -p "$INSTALL_DIR/$dir" 2>/dev/null || true
+        done
+        # Copy all files
+        find . -type f -not -path "./.git/*" | while read file; do
+            cp "$file" "$INSTALL_DIR/$file" 2>/dev/null || true
+        done
     fi
     
     success "Files copied to $INSTALL_DIR"

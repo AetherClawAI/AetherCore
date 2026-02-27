@@ -229,22 +229,39 @@ openclaw skill run aethercore --system-support --issue integration
 openclaw skill run aethercore --system-support --issue automation
 ```
 
-## 🚀 One-Click Installation System
+## 🚀 Smart Cross-Platform Installation System
 
-### **Simplest Installation (30 seconds):**
+### **🤖 Smart Installation (Recommended):**
 ```bash
-# One command installation - everything automated
-curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/INSTALL_NOW.sh | bash
+# Smart OS detection with platform-specific optimization
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install.sh | bash
 
 # After installation, AetherCore is ready to use
 openclaw skills list | grep aethercore  # Should show AetherCore
 ```
 
-### **Alternative Installation Methods:**
+### **🍎 Platform-Specific Installation:**
+
+#### **macOS-optimized Installation**
+```bash
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-macos.sh | bash
+```
+
+#### **Linux-optimized Installation**
+```bash
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-linux.sh | bash
+```
+
+#### **Universal Installation (Any Platform)**
+```bash
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-universal.sh | bash
+```
+
+### **🎯 Installation Options:**
 
 #### **Method 1: Download and Install**
 ```bash
-# Download installation script
+# Download smart installation script
 curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install.sh -o install_aethercore.sh
 chmod +x install_aethercore.sh
 ./install_aethercore.sh
@@ -256,6 +273,40 @@ git clone https://github.com/AetherClawAI/AetherCore
 cd AetherCore
 ./install.sh
 ```
+
+#### **Method 3: Force Platform Installation**
+```bash
+# Force macOS installation
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install.sh | bash --macos
+
+# Force Linux installation
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install.sh | bash --linux
+
+# Force universal installation
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install.sh | bash --universal
+```
+
+### **📊 Platform-Specific Features:**
+
+#### **🍎 macOS Optimization**
+- ✅ Automatic macOS version detection
+- ✅ Uses rsync/tar for efficient file copying
+- ✅ Handles .DS_Store files automatically
+- ✅ Checks for Homebrew and Xcode tools
+- ✅ Creates macOS-specific configuration
+
+#### **🐧 Linux Optimization**
+- ✅ Automatic Linux distribution detection
+- ✅ Uses GNU cp --parents for maximum efficiency
+- ✅ Sets secure Unix permissions (755/644)
+- ✅ Creates systemd service file (if available)
+- ✅ Handles SELinux/AppArmor considerations
+
+#### **🌐 Universal Compatibility**
+- ✅ Cross-platform compatibility guarantee
+- ✅ Simple and reliable file copying
+- ✅ Critical file verification and recovery
+- ✅ Backward compatibility maintained
 
 #### **Method 3: Manual Installation (Advanced)**
 ```bash

@@ -3,18 +3,30 @@
 
 ## 📋 Quick Start
 
-### **One-Command Installation (Recommended)**
+### **Smart Cross-Platform Installation (Recommended)**
 ```bash
-# Method 1: Using curl (simplest)
-curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/INSTALL_NOW.sh | bash
+# Method 1: Smart detection (auto-detects your OS)
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install.sh | bash
 
 # Method 2: Using wget
-wget -q -O - https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/INSTALL_NOW.sh | bash
+wget -q -O - https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install.sh | bash
 
 # Method 3: Download and run
 curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install.sh -o install_aethercore.sh
 chmod +x install_aethercore.sh
 ./install_aethercore.sh
+```
+
+### **Platform-Specific Installation**
+```bash
+# macOS-optimized installation
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-macos.sh | bash
+
+# Linux-optimized installation
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-linux.sh | bash
+
+# Universal installation (any platform)
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-universal.sh | bash
 ```
 
 ### **GitHub Installation**

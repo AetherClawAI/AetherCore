@@ -18,29 +18,59 @@
 - `one-click-installation` - Automated installation process
 - `complete-automation` - Hourly/Daily/Weekly automation
 
-## 🎯 One-Click Installation
+## 🎯 Smart Cross-Platform Installation
 
-### **🚀 Simplest Method (Recommended)**
+### **🤖 Smart Detection (Recommended)**
 ```bash
-# One command, 30 seconds installation
-curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/INSTALL_NOW.sh | bash
+# One command, automatic platform detection
+# Smart OS detection with platform-specific optimization
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install.sh | bash
 ```
 
-### **📥 Alternative Methods**
+### **🍎 Platform-Specific Installation**
 ```bash
-# Method 1: Download and run
-curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install.sh -o install_aethercore.sh
-chmod +x install_aethercore.sh
-./install_aethercore.sh
+# macOS-optimized installation
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-macos.sh | bash
 
-# Method 2: GitHub clone
-git clone https://github.com/AetherClawAI/AetherCore
-cd AetherCore
-./install.sh
+# Linux-optimized installation
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-linux.sh | bash
 
-# Method 3: Manual installation (for advanced users)
-# See INSTALLATION_GUIDE.md for details
+# Universal installation (any platform)
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-universal.sh | bash
 ```
+
+### **🎯 Installation Options**
+```bash
+# Force specific platform installation
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install.sh | bash --macos
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install.sh | bash --linux
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install.sh | bash --universal
+
+# Show help and options
+curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install.sh | bash --help
+```
+
+### **📊 Platform-Specific Features**
+
+#### **🍎 macOS Optimization**
+- ✅ Automatic macOS version detection
+- ✅ Uses rsync/tar for efficient file copying
+- ✅ Handles .DS_Store files automatically
+- ✅ Checks for Homebrew and Xcode tools
+- ✅ Creates macOS-specific configuration
+
+#### **🐧 Linux Optimization**
+- ✅ Automatic Linux distribution detection
+- ✅ Uses GNU cp --parents for maximum efficiency
+- ✅ Sets secure Unix permissions (755/644)
+- ✅ Creates systemd service file (if available)
+- ✅ Handles SELinux/AppArmor considerations
+
+#### **🌐 Universal Compatibility**
+- ✅ Cross-platform compatibility guarantee
+- ✅ Simple and reliable file copying
+- ✅ Critical file verification and recovery
+- ✅ Backward compatibility maintained
 
 ## 📊 Performance Data
 Based on actual testing:

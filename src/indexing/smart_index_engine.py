@@ -1,13 +1,10 @@
-"""
-English Version - Translated for international release
-Date: 2026-02-27
-Translator: AetherClaw Night Market Intelligence
-"""
 #!/usr/bin/env python3
 """
-🎪 Night Market IntelligenceSmart Indexing v3.1
-Smart IndexingProvideSmart IndexingPerformance
+🎪 Smart Indexing Engine - AetherCore v3.3.0
+Night Market Intelligence Technical Serviceization Practice
+High-performance smart indexing system for fast search
 """
+
 import json
 import os
 import hashlib
@@ -15,388 +12,299 @@ import time
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, asdict
 from enum import Enum
+
 class IndexType(Enum):
-    """"""
-    SEMANTIC = "semantic"      # 
-    KEYWORD = "keyword"       # 
-    METADATA = "metadata"     # 
-    NIGHT_MARKET = "night_market"  # 
-    FOUNDER = "founder"       # Founder
+    """Types of indexes supported"""
+    SEMANTIC = "semantic"      # Semantic search index
+    KEYWORD = "keyword"        # Keyword search index
+    FULLTEXT = "fulltext"      # Full-text search index
+    METADATA = "metadata"      # Metadata index
+
 @dataclass
 class IndexEntry:
-    """"""
-    id: str
+    """Entry in the smart index"""
+    file_path: str
+    line_number: int
     content: str
-    metadata: Dict[str, Any]
-    index_type: IndexType
-    relevance_score: float
-    created_at: float
-    updated_at: float
-    night_market_tags: List[str]
-    founder_priority: int
+    keywords: List[str]
+    semantic_vector: Optional[List[float]] = None
+    metadata: Optional[Dict] = None
+    timestamp: float = None
+    
+    def __post_init__(self):
+        if self.timestamp is None:
+            self.timestamp = time.time()
+
 class SmartIndexEngine:
-    """
-    Smart Indexing - ProvideSmart IndexingPerformance
-    Night Market IntelligenceTechnical Serviceization
-    """
-    def __init__(self, workspace_path: str = None):
+    """Smart indexing engine for fast search and retrieval"""
+    
+    def __init__(self, index_dir: str = ".index"):
         """
-        Smart Indexing
+        Initialize smart indexing engine
+        
         Args:
-            workspace_path: 
+            index_dir: Directory to store index files
         """
-        self.workspace_path = workspace_path or os.getcwd()
-        self.indexes: Dict[IndexType, Dict[str, IndexEntry]] = {
+        self.index_dir = index_dir
+        self.indexes = {
             IndexType.SEMANTIC: {},
             IndexType.KEYWORD: {},
-            IndexType.METADATA: {},
-            IndexType.NIGHT_MARKET: {},
-            IndexType.FOUNDER: {}
+            IndexType.FULLTEXT: {},
+            IndexType.METADATA: {}
         }
-        self.performance_stats = {
-            "total_searches": 0,
-            "avg_search_time_ms": 0,
-            "cache_hits": 0,
-            "cache_misses": 0,
-            "acceleration_factor": 317.6  # Smart IndexingPerformance
-        }
-        # 
-        self.night_market_config = {
-            "rhythm_optimization": True,
-            "founder_priority": True,
-            "semantic_analysis": True,
-            "smart_categorization": True
-        }
-        print("🎪 ")
-        print(f"⚡ : {self.performance_stats['acceleration_factor']}")
-    def create_index(self, content: str, metadata: Dict[str, Any] = None) -> str:
+        self.entries = []
+        
+        # Create index directory if it doesn't exist
+        os.makedirs(index_dir, exist_ok=True)
+    
+    def index_file(self, file_path: str) -> Dict:
         """
-        Smart Indexing
+        Index a file for fast search
+        
         Args:
-            content: 
-            metadata: 
+            file_path: Path to file to index
+            
         Returns:
-            ID
+            Dict with indexing results
         """
-        start_time = time.time()
-        # ID
-        content_hash = hashlib.sha256(content.encode()).hexdigest()[:16]
-        index_id = f"idx_{content_hash}"
-        # 
-        semantic_tags = self._analyze_semantic(content)
+        print(f"🔍 Indexing file: {file_path}")
+        
+        if not os.path.exists(file_path):
+            return {"status": "error", "message": f"File not found: {file_path}"}
+        
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            # Split into lines for line-level indexing
+            lines = content.split('\n')
+            indexed_lines = 0
+            
+            for line_num, line in enumerate(lines, 1):
+                if line.strip():  # Skip empty lines
+                    entry = self._create_index_entry(file_path, line_num, line)
+                    self.entries.append(entry)
+                    self._add_to_indexes(entry)
+                    indexed_lines += 1
+            
+            # Save index to disk
+            self._save_index()
+            
+            return {
+                "status": "success",
+                "file_path": file_path,
+                "indexed_lines": indexed_lines,
+                "total_lines": len(lines),
+                "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+            }
+            
+        except Exception as e:
+            return {"status": "error", "message": f"Failed to index file: {e}"}
+    
+    def search(self, query: str, limit: int = 10) -> List[Dict]:
+        """
+        Search indexed content
+        
+        Args:
+            query: Search query
+            limit: Maximum number of results
+            
+        Returns:
+            List of search results
+        """
+        print(f"🔍 Searching for: {query}")
+        
+        results = []
+        query_lower = query.lower()
+        
+        # Simple keyword matching (can be enhanced with more sophisticated algorithms)
+        for entry in self.entries:
+            score = self._calculate_relevance_score(entry, query_lower)
+            if score > 0:
+                results.append({
+                    "file": entry.file_path,
+                    "line": entry.line_number,
+                    "content": entry.content,
+                    "score": score,
+                    "keywords": entry.keywords[:5]  # Top 5 keywords
+                })
+        
+        # Sort by relevance score
+        results.sort(key=lambda x: x["score"], reverse=True)
+        
+        return results[:limit]
+    
+    def _create_index_entry(self, file_path: str, line_num: int, content: str) -> IndexEntry:
+        """Create an index entry from file content"""
+        # Extract keywords (simple implementation)
         keywords = self._extract_keywords(content)
-        night_market_tags = self._extract_night_market_tags(content)
-        founder_priority = self._calculate_founder_priority(content)
-        # 
-        entry = IndexEntry(
-            id=index_id,
+        
+        # Create semantic vector (placeholder - can be enhanced with ML models)
+        semantic_vector = self._create_semantic_vector(content)
+        
+        # Extract metadata
+        metadata = {
+            "file_size": os.path.getsize(file_path) if os.path.exists(file_path) else 0,
+            "file_extension": os.path.splitext(file_path)[1],
+            "line_length": len(content),
+            "word_count": len(content.split())
+        }
+        
+        return IndexEntry(
+            file_path=file_path,
+            line_number=line_num,
             content=content,
-            metadata=metadata or {},
-            index_type=self._determine_index_type(content),
-            relevance_score=self._calculate_relevance(content),
-            created_at=time.time(),
-            updated_at=time.time(),
-            night_market_tags=night_market_tags,
-            founder_priority=founder_priority
+            keywords=keywords,
+            semantic_vector=semantic_vector,
+            metadata=metadata
         )
-        # 
-        self._add_to_all_indexes(entry, semantic_tags, keywords)
-        elapsed_ms = (time.time() - start_time) * 1000
-        print(f"✅ : {index_id} ({elapsed_ms:.3f}ms)")
-        print(f"  : {night_market_tags}")
-        print(f"  : {founder_priority}")
-        return index_id
-    def search(self, query: str, index_type: IndexType = None, limit: int = 10) -> List[IndexEntry]:
-        """
-         - Smart IndexingPerformance
-        Args:
-            query: 
-            index_type: None
-            limit: 
-        Returns:
-        """
-        search_start = time.time()
-        self.performance_stats["total_searches"] += 1
-        # 
-        if index_type is None:
-            index_type = self._smart_select_index_type(query)
-        # 
-        if index_type == IndexType.SEMANTIC:
-            results = self._semantic_search(query, limit)
-        elif index_type == IndexType.KEYWORD:
-            results = self._keyword_search(query, limit)
-        elif index_type == IndexType.NIGHT_MARKET:
-            results = self._night_market_search(query, limit)
-        elif index_type == IndexType.FOUNDER:
-            results = self._founder_search(query, limit)
-        else:
-            results = self._metadata_search(query, limit)
-        # Night Market Rhythm
-        if self.night_market_config["rhythm_optimization"]:
-            results = self._apply_night_market_rhythm(results)
-        # Founder
-        if self.night_market_config["founder_priority"]:
-            results = self._apply_founder_priority(results)
-        # Performance
-        search_time_ms = (time.time() - search_start) * 1000
-        self._update_performance_stats(search_time_ms)
-        # 
-        traditional_time_ms = search_time_ms * self.performance_stats["acceleration_factor"]
-        acceleration = self.performance_stats["acceleration_factor"]
-        print(f"🔍 : '{query}'")
-        print(f"⚡ : {search_time_ms:.3f}ms ({traditional_time_ms:.1f}ms)")
-        print(f"🚀 : {acceleration}")
-        print(f"📊 : {len(results)}")
-        return results
-    def create_workspace_index(self) -> Dict[str, Any]:
-        """
-        Smart Indexing
-        Returns:
-        """
-        print("🏢 ...")
-        start_time = time.time()
-        stats = {
-            "total_files": 0,
-            "indexed_files": 0,
-            "total_size_bytes": 0,
-            "index_size_bytes": 0,
-            "file_types": {},
-            "night_market_tags": set(),
-            "founder_mentions": 0
-        }
-        # 
-        for root, dirs, files in os.walk(self.workspace_path):
-            for file in files:
-                if file.endswith(('.md', '.txt', '.py', '.json', '.html')):
-                    file_path = os.path.join(root, file)
-                    try:
-                        file_stats = self._index_file(file_path)
-                        self._update_stats(stats, file_stats)
-                    except Exception as e:
-                        print(f"⚠️   {file_path}: {e}")
-        # 
-        elapsed_time = time.time() - start_time
-        stats["indexing_time_seconds"] = elapsed_time
-        stats["files_per_second"] = stats["indexed_files"] / elapsed_time if elapsed_time > 0 else 0
-        # 
-        stats["night_market_tags"] = list(stats["night_market_tags"])
-        stats["compression_ratio"] = (
-            stats["index_size_bytes"] / stats["total_size_bytes"] 
-            if stats["total_size_bytes"] > 0 else 0
-        )
-        print(f"✅ ")
-        print(f"📁 : {stats['total_files']}")
-        print(f"📊 : {stats['indexed_files']}")
-        print(f"⏱️  : {elapsed_time:.2f}")
-        print(f"⚡ : {stats['files_per_second']:.1f} /")
-        print(f"🎪 : {len(stats['night_market_tags'])}")
-        print(f"👑 : {stats['founder_mentions']}")
-        return stats
-    def get_performance_report(self) -> Dict[str, Any]:
-        """
-        Performance
-        Returns:
-            Performance
-        """
-        report = {
-            "engine": "SmartIndexEngine v3.1",
-            "performance_stats": self.performance_stats.copy(),
-            "index_counts": {
-                index_type.value: len(entries)
-                for index_type, entries in self.indexes.items()
-            },
-            "night_market_features": self.night_market_config,
-            "acceleration_claims": {
-                "search_acceleration": 317.6,
-                "overall_acceleration": 210245,
-                "workflow_acceleration": 5.8
-            },
-            "": ""
-        }
-        return report
-    # 
-    def _analyze_semantic(self, content: str) -> List[str]:
-        """"""
-        # ImplementNLP
-        semantic_tags = []
-        content_lower = content.lower()
-        # Night Market Intelligence
-        if any(term in content_lower for term in ["", "night market", "", "aetherclaw"]):
-            semantic_tags.append("Night Market Intelligence")
-        # 
-        if any(term in content_lower for term in ["json", "", "Performance", ""]):
-            semantic_tags.append("")
-        # Founder
-        if any(term in content_lower for term in ["philip", "Founder", "founder"]):
-            semantic_tags.append("Founder")
-        return semantic_tags
+    
     def _extract_keywords(self, content: str) -> List[str]:
-        """"""
-        # Implement
+        """Extract keywords from content (simple implementation)"""
+        # Remove common words and punctuation
+        common_words = {"the", "a", "an", "and", "or", "but", "in", "on", "at", "to", "for", "of", "with", "by"}
+        
         words = content.lower().split()
-        keywords = [word for word in words if len(word) > 3][:10]
-        return keywords
-    def _extract_night_market_tags(self, content: str) -> List[str]:
-        """"""
-        tags = []
-        content_lower = content.lower()
-        # 
-        night_market_themes = [
-            "", "night market", "", "stall", "", "food",
-            "", "culture", "", "intelligence", "", "tech",
-            "", "serviceization", "", "practice"
-        ]
-        for theme in night_market_themes:
-            if theme in content_lower:
-                tags.append(theme)
-        # Night Market Intelligence
-        if "Night Market Intelligence" in content or "night market intelligence" in content_lower:
-            tags.append("Night Market Intelligence")
-            tags.append("Technical Serviceization")
-        return list(set(tags))
-    def _calculate_founder_priority(self, content: str) -> int:
-        """"""
-        priority = 0
-        content_lower = content.lower()
-        # Founder
-        if "philip" in content_lower:
-            priority += 10
-        if "" in content:
-            priority += 8
-        if "philip" in content_lower:
-            priority += 6
-        # 
-        if "" in content or "command" in content_lower:
-            priority += 5
-        # 
-        if any(term in content for term in ["", "", "", ""]):
-            priority += 4
-        return min(priority, 20)  # 20
-    def _determine_index_type(self, content: str) -> IndexType:
-        """"""
-        content_lower = content.lower()
-        if any(term in content_lower for term in ["", "night market", ""]):
-            return IndexType.NIGHT_MARKET
-        if any(term in content_lower for term in ["philip", "Founder", "founder"]):
-            return IndexType.FOUNDER
-        if len(content.split()) > 50:  # 
-            return IndexType.SEMANTIC
-        return IndexType.KEYWORD
-    def _calculate_relevance(self, content: str) -> float:
-        """"""
-        # Implement
-        relevance = 0.5  # 
-        # 
-        word_count = len(content.split())
-        if word_count > 100:
-            relevance += 0.2
-        elif word_count > 50:
-            relevance += 0.1
-        # 
-        if any(term in content.lower() for term in ["", "night market"]):
-            relevance += 0.15
-        # Founder
-        if any(term in content.lower() for term in ["philip", ""]):
-            relevance += 0.2
-        return min(relevance, 1.0)
-    def _add_to_all_indexes(self, entry: IndexEntry, semantic_tags: List[str], keywords: List[str]):
-        """"""
-        # 
-        self.indexes[entry.index_type][entry.id] = entry
-        # 
-        for tag in semantic_tags:
-            if tag not in self.indexes[IndexType.SEMANTIC]:
-                self.indexes[IndexType.SEMANTIC][tag] = entry
-        # 
-        for keyword in keywords:
+        keywords = []
+        
+        for word in words:
+            # Clean word
+            word = word.strip('.,!?;:"\'()[]{}')
+            if word and word not in common_words and len(word) > 2:
+                keywords.append(word)
+        
+        return keywords[:10]  # Limit to top 10 keywords
+    
+    def _create_semantic_vector(self, content: str) -> List[float]:
+        """Create semantic vector from content (placeholder)"""
+        # This is a placeholder implementation
+        # In a real system, you would use word embeddings or other ML techniques
+        return [hash(content) % 100 / 100.0 for _ in range(10)]
+    
+    def _add_to_indexes(self, entry: IndexEntry):
+        """Add entry to all indexes"""
+        # Add to keyword index
+        for keyword in entry.keywords:
             if keyword not in self.indexes[IndexType.KEYWORD]:
-                self.indexes[IndexType.KEYWORD][keyword] = entry
-    def _smart_select_index_type(self, query: str) -> IndexType:
-        """"""
-        query_lower = query.lower()
-        if any(term in query_lower for term in ["", "night market"]):
-            return IndexType.NIGHT_MARKET
-        if any(term in query_lower for term in ["philip", "", "founder"]):
-            return IndexType.FOUNDER
-        if len(query.split()) > 3:  # 
-            return IndexType.SEMANTIC
-        return IndexType.KEYWORD
-    def _semantic_search(self, query: str, limit: int) -> List[IndexEntry]:
-        """"""
-        results = []
-        query_lower = query.lower()
-        for entry in self.indexes[IndexType.SEMANTIC].values():
-            if query_lower in entry.content.lower():
-                results.append(entry)
-            if len(results) >= limit:
-                break
-        return results
-    def _keyword_search(self, query: str, limit: int) -> List[IndexEntry]:
-        """"""
-        results = []
-        query_lower = query.lower()
-        # 
-        if query_lower in self.indexes[IndexType.KEYWORD]:
-            results.append(self.indexes[IndexType.KEYWORD][query_lower])
-        # 
-        for entry in self.indexes[IndexType.KEYWORD].values():
-            if query_lower in entry.content.lower():
-                results.append(entry)
-            if len(results) >= limit:
-                break
-        return results
-    def _night_market_search(self, query: str, limit: int) -> List[IndexEntry]:
-        """"""
-        results = []
-        query_lower = query.lower()
-        for entry in self.indexes[IndexType.NIGHT_MARKET].values():
-            # 
-            if any(tag.lower() in query_lower for tag in entry.night_market_tags):
-                results.append(entry)
-            # 
-            elif query_lower in entry.content.lower():
-                results.append(entry)
-            if len(results) >= limit:
-                break
-        return results
-    def _founder_search(self, query: str, limit: int) -> List[IndexEntry]:
-        """"""
-        results = []
-        # Founder
-        sorted_entries = sorted(
-            self.indexes[IndexType.FOUNDER].values(),
-            key=lambda x: x.founder_priority,
-            reverse=True
-        )
-        for entry in sorted_entries[:limit]:
-            results.append(entry)
-        return results
-    def _metadata_search(self, query: str, limit: int) -> List[IndexEntry]:
-        """"""
-        results = []
-        query_lower = query.lower()
-        for entry in self.indexes[IndexType.METADATA].values():
-            # 
-            metadata_str = json.dumps(entry.metadata).lower()
-            if query_lower in metadata_str:
-                results.append(entry)
-            if len(results) >= limit:
-                break
-        return results
-    def _apply_night_market_rhythm(self, results: List[IndexEntry]) -> List[IndexEntry]:
-        """"""
-        # 
-        current_hour = time.localtime().tm_hour
-        # Night Market Rhythm
-        if 18 <= current_hour <= 23:  # 6-11
-            # 
-            results.sort(key=lambda x: len(x.night_market_tags), reverse=True)
-        else:
-            # 
-            results.sort(key=lambda x: x.relevance_score, reverse=True)
-        return results
-    def _apply_founder_priority(self, results: List[IndexEntry]) -> List[IndexEntry]:
-        """"""
-        # Founder
-        results.sort(key=lambda x: x.founder_priority, reverse=True)
-        return results
+                self.indexes[IndexType.KEYWORD][keyword] = []
+            self.indexes[IndexType.KEYWORD][keyword].append(entry)
+        
+        # Add to fulltext index (simplified)
+        content_lower = entry.content.lower()
+        for word in content_lower.split():
+            word = word.strip('.,!?;:"\'()[]{}')
+            if word and len(word) > 2:
+                if word not in self.indexes[IndexType.FULLTEXT]:
+                    self.indexes[IndexType.FULLTEXT][word] = []
+                self.indexes[IndexType.FULLTEXT][word].append(entry)
+    
+    def _calculate_relevance_score(self, entry: IndexEntry, query: str) -> float:
+        """Calculate relevance score for search"""
+        score = 0.0
+        
+        # Keyword matching
+        for keyword in entry.keywords:
+            if query in keyword:
+                score += 2.0
+            elif keyword in query:
+                score += 1.0
+        
+        # Content matching
+        content_lower = entry.content.lower()
+        if query in content_lower:
+            score += 3.0
+        
+        # Position bonus (earlier in file is more relevant)
+        position_bonus = 1.0 / (entry.line_number ** 0.5)
+        score += position_bonus
+        
+        return score
+    
+    def _save_index(self):
+        """Save index to disk"""
+        index_file = os.path.join(self.index_dir, "smart_index.json")
+        
+        index_data = {
+            "entries": [asdict(entry) for entry in self.entries],
+            "index_types": {index_type.value: list(index.keys()) 
+                           for index_type, index in self.indexes.items()},
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "version": "3.3.0"
+        }
+        
+        with open(index_file, 'w', encoding='utf-8') as f:
+            json.dump(index_data, f, indent=2)
+    
+    def load_index(self) -> bool:
+        """Load index from disk"""
+        index_file = os.path.join(self.index_dir, "smart_index.json")
+        
+        if not os.path.exists(index_file):
+            return False
+        
+        try:
+            with open(index_file, 'r', encoding='utf-8') as f:
+                index_data = json.load(f)
+            
+            # Recreate entries
+            self.entries = []
+            for entry_data in index_data.get("entries", []):
+                entry = IndexEntry(
+                    file_path=entry_data["file_path"],
+                    line_number=entry_data["line_number"],
+                    content=entry_data["content"],
+                    keywords=entry_data["keywords"],
+                    semantic_vector=entry_data.get("semantic_vector"),
+                    metadata=entry_data.get("metadata"),
+                    timestamp=entry_data.get("timestamp", time.time())
+                )
+                self.entries.append(entry)
+                self._add_to_indexes(entry)
+            
+            print(f"✅ Loaded index with {len(self.entries)} entries")
+            return True
+            
+        except Exception as e:
+            print(f"❌ Failed to load index: {e}")
+            return False
+    
+    def get_stats(self) -> Dict:
+        """Get indexing statistics"""
+        return {
+            "total_entries": len(self.entries),
+            "index_types": {
+                index_type.value: len(index) 
+                for index_type, index in self.indexes.items()
+            },
+            "keywords_count": len(self.indexes[IndexType.KEYWORD]),
+            "fulltext_words": len(self.indexes[IndexType.FULLTEXT]),
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+        }
+
+# Example usage
+if __name__ == "__main__":
+    # Create smart index engine
+    engine = SmartIndexEngine()
+    
+    # Load existing index or create new
+    if not engine.load_index():
+        print("📝 No existing index found, creating new index...")
+    
+    # Example: Index a file
+    test_file = "test_memory.md"
+    if os.path.exists(test_file):
+        result = engine.index_file(test_file)
+        print(f"Indexing result: {result}")
+    
+    # Example: Search
+    search_results = engine.search("AetherCore", limit=5)
+    print(f"\n🔍 Search results for 'AetherCore':")
+    for i, result in enumerate(search_results, 1):
+        print(f"  {i}. {result['file']}:{result['line']} - {result['content'][:50]}...")
+    
+    # Get statistics
+    stats = engine.get_stats()
+    print(f"\n📊 Index Statistics:")
+    print(f"  Total entries: {stats['total_entries']}")
+    print(f"  Keywords indexed: {stats['keywords_count']}")
+    print(f"  Full-text words: {stats['fulltext_words']}")

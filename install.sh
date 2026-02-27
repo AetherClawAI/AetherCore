@@ -152,11 +152,23 @@ install_dependencies() {
 copy_files() {
     log "📄 Copying files to installation directory..."
     
-    # Copy all files except .git directory
-    find . -type f -not -path "./.git/*" -exec cp --parents {} "$INSTALL_DIR" \; 2>/dev/null || warning "Some files may not have copied correctly"
-    
-    # Copy directories
-    find . -type d -not -name ".git" -not -path "./.git/*" -exec mkdir -p "$INSTALL_DIR/{}" \; 2>/dev/null
+    # Cross-platform file copying (works on both macOS and Linux)
+    # Method 1: Use rsync if available (best option)
+    if command -v rsync &> /dev/null; then
+        log "Using rsync for cross-platform file copying..."
+        rsync -av --exclude='.git' --exclude='.git/*' . "$INSTALL_DIR/" 2>/dev/null || warning "Some files may not have copied correctly"
+    # Method 2: Use tar for cross-platform compatibility
+    elif command -v tar &> /dev/null; then
+        log "Using tar for cross-platform file copying..."
+        tar cf - --exclude='.git' --exclude='.git/*' . | (cd "$INSTALL_DIR" && tar xf -) 2>/dev/null || warning "Some files may not have copied correctly"
+    # Method 3: Manual copying for macOS compatibility
+    else
+        log "Using manual copying for macOS compatibility..."
+        # Create directory structure first
+        find . -type d -not -name ".git" -not -path "./.git/*" -exec mkdir -p "$INSTALL_DIR/{}" \; 2>/dev/null
+        # Copy files individually
+        find . -type f -not -path "./.git/*" -exec sh -c 'cp "$1" "$2/$(dirname "$1")/" 2>/dev/null' _ {} "$INSTALL_DIR" \; || warning "Some files may not have copied correctly"
+    fi
     
     success "Files copied to $INSTALL_DIR"
 }

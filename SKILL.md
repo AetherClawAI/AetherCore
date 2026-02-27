@@ -25,7 +25,7 @@ homepage: https://github.com/AetherClawAI/AetherCore
 - **Brand Upgrade Instruction**: "AetherCore v3.3 is the skill" + "Didn't we already rename it before? Why isn't it updated? The latest name should now be AetherCore v3.3"
 - **ClawHub Release Instruction**: "I need to open source the latest AetherCore v3.3 version to clawhub.ai, copy the latest version and record it as the first ClawHub open source version"
 ### 🎯 System Introduction
-**AetherCore v3.3** (formerly Night Market Intelligence JSON-only Optimization System v3.0) is a modern context optimization system evolved from the GSD (Get Shit Done) project. Through the founder's strategic decision to "abandon XML and directly switch to JSON", it achieves revolutionary performance breakthroughs that surpass XML by 500%+. Now officially upgraded to the AetherCore brand, it becomes the core technical Skill of Night Market Intelligence technical serviceization practice.
+**AetherCore v3.3** (formerly Night Market Intelligence JSON-only Optimization System v3.0) is a modern context optimization system. Through the founder's strategic decision to "abandon XML and directly switch to JSON", it achieves revolutionary performance breakthroughs that surpass XML by 500%+. Now officially upgraded to the AetherCore brand, it becomes the core technical Skill of Night Market Intelligence technical serviceization practice.
 ### ⚡ Performance Breakthrough
 | Performance Metric | XML Baseline | **This System Achieves** | Improvement |
 |-------------------|--------------|--------------------------|-------------|
@@ -45,9 +45,9 @@ homepage: https://github.com/AetherClawAI/AetherCore
 - ✅ **Night Market Rhythm Optimization Algorithm** - Ultra-fast response
 - ✅ **Night Market Stall Synergy System** - Intelligent agent collaboration
 - ✅ **Founder Dashboard** - Exclusive monitoring
-#### **3. Beyond GSD Achievements**
-- ✅ **Performance Beyond** - Comprehensively exceeds 500-700%
-- ✅ **Feature Beyond** - Exclusive Night Market features
+#### **3. Advanced Technical Achievements**
+- ✅ **Performance Excellence** - Comprehensively exceeds 500-700%
+- ✅ **Feature Innovation** - Exclusive Night Market features
 
 ### 📚 Usage Instructions
 
@@ -840,7 +840,7 @@ Copyright (c) 2026 Philip
 - First official release on ClawHub.ai
 ### 🏆 Milestone Records
 #### **Development Milestones:**
-1. **2026-02-13**: Started super evolution from GSD project
+1. **2026-02-13**: Started super evolution project
 2. **2026-02-14 17:34**: Founder instruction "abandon XML and directly switch to JSON"
 3. **2026-02-14 18:23**: Founder instruction "can fully continue remaining optimizations"
 4. **2026-02-14 19:12**: Founder instruction "continue evolution, notify me when complete"

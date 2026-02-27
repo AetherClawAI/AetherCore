@@ -1,480 +1,274 @@
 #!/bin/bash
-# 🚀 AetherCore v3.3.0 One-Click Installation
+# 🚀 AetherCore v3.3.0 Smart One-Click Installation
 # Night Market Intelligence Technical Serviceization Practice
-# Complete automation system with one-command installation
+# Intelligent OS detection with platform-specific optimization
 
 set -e  # Exit on error
 
 echo "============================================================"
-echo "🚀 AetherCore v3.3.0 One-Click Installation"
+echo "🤖 AetherCore v3.3.0 Smart One-Click Installation"
 echo "Night Market Intelligence Technical Serviceization Practice"
 echo "============================================================"
-
-# Configuration
-AETHERCORE_VERSION="3.3.0"
-INSTALL_DIR="$HOME/.openclaw/skills/aethercore"
-REPO_URL="https://github.com/AetherClawAI/AetherCore"
-TEMP_DIR="/tmp/aethercore-install-$(date +%s)"
-LOG_FILE="/tmp/aethercore-install-$(date +%Y%m%d_%H%M%S).log"
 
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # Logging function
 log() {
-    echo -e "${BLUE}[$(date '+%Y-%m-%d %H:%M:%S')]${NC} $1" | tee -a "$LOG_FILE"
+    echo -e "${BLUE}[$(date '+%Y-%m-%d %H:%M:%S')]${NC} $1"
 }
 
 success() {
-    echo -e "${GREEN}✅ $1${NC}" | tee -a "$LOG_FILE"
+    echo -e "${GREEN}✅ $1${NC}"
 }
 
 warning() {
-    echo -e "${YELLOW}⚠️  $1${NC}" | tee -a "$LOG_FILE"
+    echo -e "${YELLOW}⚠️  $1${NC}"
 }
 
 error() {
-    echo -e "${RED}❌ $1${NC}" | tee -a "$LOG_FILE"
+    echo -e "${RED}❌ $1${NC}"
     exit 1
 }
 
-# Check prerequisites
-check_prerequisites() {
-    log "🔍 Checking prerequisites..."
-    
-    # Check if OpenClaw is installed
-    if ! command -v openclaw &> /dev/null; then
-        error "OpenClaw is not installed. Please install OpenClaw first."
-    fi
-    
-    # Check Python
-    if ! command -v python3 &> /dev/null; then
-        error "Python 3 is not installed. Please install Python 3 first."
-    fi
-    
-    # Check pip
-    if ! command -v pip3 &> /dev/null; then
-        warning "pip3 not found, trying pip..."
-        if ! command -v pip &> /dev/null; then
-            error "pip is not installed. Please install pip first."
-        fi
-    fi
-    
-    success "Prerequisites check passed"
+info() {
+    echo -e "${CYAN}ℹ️  $1${NC}"
 }
 
-# Create installation directory
-create_install_dir() {
-    log "📁 Creating installation directory..."
-    
-    # Create OpenClaw skills directory if it doesn't exist
-    mkdir -p "$HOME/.openclaw/skills" || error "Failed to create skills directory"
-    
-    # Backup existing installation if it exists
-    if [ -d "$INSTALL_DIR" ]; then
-        BACKUP_DIR="$INSTALL_DIR.backup.$(date +%Y%m%d_%H%M%S)"
-        log "Backing up existing installation to $BACKUP_DIR"
-        mv "$INSTALL_DIR" "$BACKUP_DIR" || warning "Failed to backup existing installation"
-    fi
-    
-    # Create fresh installation directory
-    mkdir -p "$INSTALL_DIR" || error "Failed to create installation directory"
-    success "Installation directory created: $INSTALL_DIR"
+highlight() {
+    echo -e "${PURPLE}✨ $1${NC}"
 }
 
-# Download AetherCore from GitHub
-download_aethercore() {
-    log "📥 Downloading AetherCore v$AETHERCORE_VERSION..."
+# Detect operating system with details
+detect_os_with_details() {
+    local os_type=$(uname -s)
+    local os_details=""
     
-    # Create temp directory
-    mkdir -p "$TEMP_DIR" || error "Failed to create temp directory"
-    cd "$TEMP_DIR" || error "Failed to enter temp directory"
-    
-    # Download from GitHub (using git clone or curl)
-    if command -v git &> /dev/null; then
-        log "Using git to clone repository..."
-        git clone --depth 1 "$REPO_URL" . || error "Failed to clone repository"
-    else
-        log "Using curl to download repository..."
-        # Download as zip and extract
-        curl -L "$REPO_URL/archive/main.zip" -o aethercore.zip || error "Failed to download repository"
-        unzip -q aethercore.zip || error "Failed to extract repository"
-        mv AetherCore-main/* . || error "Failed to move files"
-        rm -rf AetherCore-main aethercore.zip
-    fi
-    
-    # Verify download
-    if [ ! -f "SKILL.md" ]; then
-        error "Download failed: SKILL.md not found"
-    fi
-    
-    success "AetherCore downloaded successfully"
-}
-
-# Install Python dependencies
-install_dependencies() {
-    log "🔧 Installing Python dependencies..."
-    
-    if [ -f "requirements.txt" ]; then
-        log "Installing from requirements.txt..."
-        
-        # Try pip3 first, then pip
-        if command -v pip3 &> /dev/null; then
-            pip3 install -r requirements.txt --quiet || warning "Some dependencies may not have installed correctly"
-        elif command -v pip &> /dev/null; then
-            pip install -r requirements.txt --quiet || warning "Some dependencies may not have installed correctly"
-        else
-            warning "pip not found, skipping dependency installation"
-        fi
-    else
-        log "No requirements.txt found, installing core dependencies..."
-        
-        # Install core dependencies
-        CORE_DEPS=("orjson" "ujson" "python-rapidjson")
-        for dep in "${CORE_DEPS[@]}"; do
-            log "Installing $dep..."
-            if command -v pip3 &> /dev/null; then
-                pip3 install "$dep" --quiet || warning "Failed to install $dep"
-            elif command -v pip &> /dev/null; then
-                pip install "$dep" --quiet || warning "Failed to install $dep"
+    case "$os_type" in
+        Darwin)
+            if command -v sw_vers &> /dev/null; then
+                local product_name=$(sw_vers -productName)
+                local product_version=$(sw_vers -productVersion)
+                os_details="$product_name $product_version ($(uname -m))"
+            else
+                os_details="macOS (Unknown version)"
             fi
-        done
-    fi
-    
-    success "Dependencies installed"
+            echo "macOS|$os_details"
+            ;;
+        Linux)
+            if [ -f /etc/os-release ]; then
+                . /etc/os-release
+                os_details="$NAME $VERSION_ID ($(uname -m))"
+            elif [ -f /etc/lsb-release ]; then
+                . /etc/lsb-release
+                os_details="$DISTRIB_ID $DISTRIB_RELEASE ($(uname -m))"
+            else
+                os_details="Linux $(uname -r) ($(uname -m))"
+            fi
+            echo "Linux|$os_details"
+            ;;
+        *)
+            echo "Unknown|$os_type $(uname -r) ($(uname -m))"
+            ;;
+    esac
 }
 
-# Copy files to installation directory
-copy_files() {
-    log "📄 Copying files to installation directory..."
+# Download and execute platform-specific installer
+download_and_execute_installer() {
+    local platform=$1
+    local installer_url=""
+    local installer_name=""
     
-    # Ensure we're in the temp directory
-    cd "$TEMP_DIR" || error "Failed to enter temp directory for file copying"
+    case "$platform" in
+        macOS)
+            installer_url="https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-macos.sh"
+            installer_name="install-macos.sh"
+            ;;
+        Linux)
+            installer_url="https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-linux.sh"
+            installer_name="install-linux.sh"
+            ;;
+        *)
+            installer_url="https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-universal.sh"
+            installer_name="install-universal.sh"
+            ;;
+    esac
     
-    # Detect operating system for cross-platform compatibility
-    detect_os_and_copy() {
-        local os_type=$(uname -s)
-        
-        case "$os_type" in
-            Darwin)
-                log "🖥️  Detected macOS (Darwin) - using macOS compatible copy method..."
-                copy_for_macos
-                ;;
-            Linux)
-                log "🐧 Detected Linux - using Linux optimized copy method..."
-                copy_for_linux
-                ;;
-            *)
-                log "🌐 Detected unknown OS ($os_type) - using universal fallback method..."
-                copy_universal_fallback
-                ;;
-        esac
-    }
+    log "Downloading $platform-optimized installer..."
     
-    # macOS specific copy (BSD cp)
-    copy_for_macos() {
-        # macOS cp doesn't support --parents, use tar or rsync if available
-        if command -v rsync &> /dev/null; then
-            log "Using rsync (best for macOS)..."
-            rsync -av --exclude='.git' --exclude='.git/*' . "$INSTALL_DIR/" 2>/dev/null || copy_universal_fallback
-        elif command -v tar &> /dev/null; then
-            log "Using tar (good for macOS)..."
-            tar cf - --exclude='.git' --exclude='.git/*' . | (cd "$INSTALL_DIR" && tar xf -) 2>/dev/null || copy_universal_fallback
-        else
-            log "Using cp -R with manual .git removal (fallback for macOS)..."
-            cp -R . "$INSTALL_DIR" 2>/dev/null
-            rm -rf "$INSTALL_DIR/.git" 2>/dev/null || true
-        fi
-    }
+    # Create temp directory for installer
+    local temp_installer_dir="/tmp/aethercore-smart-install-$(date +%s)"
+    mkdir -p "$temp_installer_dir"
+    local installer_path="$temp_installer_dir/$installer_name"
     
-    # Linux specific copy (GNU cp)
-    copy_for_linux() {
-        # Linux cp supports --parents, use it for efficiency
-        if cp --version 2>/dev/null | grep -q "GNU coreutils"; then
-            log "Using GNU cp with --parents (most efficient for Linux)..."
-            find . -type f -not -path "./.git/*" -exec cp --parents {} "$INSTALL_DIR" \; 2>/dev/null || copy_universal_fallback
-        else
-            # Some Linux distributions might have different cp
-            copy_universal_fallback
-        fi
-    }
-    
-    # Universal fallback method (works on all platforms)
-    copy_universal_fallback() {
-        log "Using universal fallback copy method..."
-        # Create directory structure
-        find . -type d -not -name ".git" -not -path "./.git/*" -exec mkdir -p "$INSTALL_DIR/{}" \; 2>/dev/null
-        # Copy files
-        find . -type f -not -path "./.git/*" -exec cp {} "$INSTALL_DIR/{}" \; 2>/dev/null
-    }
-    
-    # Execute OS-detected copy method
-    detect_os_and_copy
-    
-    # Verify critical files were copied
-    verify_critical_files
-    
-    success "Files copied to $INSTALL_DIR"
-}
-
-# Verify critical files were copied successfully
-verify_critical_files() {
-    log "🔍 Verifying critical files were copied..."
-    
-    local critical_files=("SKILL.md" "README.md" "clawhub.json" "requirements.txt")
-    local missing_files=()
-    
-    for file in "${critical_files[@]}"; do
-        if [ ! -f "$INSTALL_DIR/$file" ]; then
-            missing_files+=("$file")
-            warning "Critical file missing: $file"
-        fi
-    done
-    
-    if [ ${#missing_files[@]} -gt 0 ]; then
-        log "🔄 Attempting to download missing critical files from GitHub..."
-        for file in "${missing_files[@]}"; do
-            log "Downloading $file from GitHub..."
-            curl -sSL "https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/$file" -o "$INSTALL_DIR/$file" 2>/dev/null || warning "Failed to download $file"
-        done
-    fi
-    
-    # Final verification
-    local final_missing=()
-    for file in "${critical_files[@]}"; do
-        if [ ! -f "$INSTALL_DIR/$file" ]; then
-            final_missing+=("$file")
-        fi
-    done
-    
-    if [ ${#final_missing[@]} -gt 0 ]; then
-        error "Critical files still missing after recovery: ${final_missing[*]}"
+    # Download installer
+    if command -v curl &> /dev/null; then
+        curl -sSL "$installer_url" -o "$installer_path" || {
+            warning "Failed to download $platform installer, falling back to universal..."
+            download_and_execute_installer "Unknown"
+            return
+        }
+    elif command -v wget &> /dev/null; then
+        wget -q "$installer_url" -O "$installer_path" || {
+            warning "Failed to download $platform installer, falling back to universal..."
+            download_and_execute_installer "Unknown"
+            return
+        }
     else
-        log "✅ All critical files verified"
-    fi
-}
-
-# Create configuration files
-create_config_files() {
-    log "⚙️ Creating configuration files..."
-    
-    cd "$INSTALL_DIR" || error "Failed to enter installation directory"
-    
-    # Create .auto_enable file
-    cat > .auto_enable << EOF
-AetherCore v$AETHERCORE_VERSION - Night Market Intelligence Technical Serviceization Practice
-Complete Automation System with Hourly/Daily/Weekly Scheduling
-Founder: Philip
-Creator: AetherClaw (Night Market Intelligence)
-Installation Date: $(date '+%Y-%m-%d %H:%M:%S')
-GitHub: $REPO_URL
-One-Click Installation Version: 1.0
-
-Features:
-✅ Complete Automation: Hourly, Daily, Weekly automated optimization
-✅ Full Integration: OpenClaw Heartbeat, Cron, Logging integration
-✅ Complete Autonomy: Zero manual operations, intelligent detection
-✅ Real Performance: 45,305 JSON operations/second
-✅ Pure English: 100% English international version
-✅ One-Click Installation: Automated installation process
-
-Night Market Intelligence Technical Serviceization Practice Complete!
-EOF
-    
-    # Create .skill_enabled file
-    cat > .skill_enabled << EOF
-enabled=true
-name=aethercore
-version=$AETHERCORE_VERSION
-description=AetherCore v$AETHERCORE_VERSION - Night Market Intelligence Technical Serviceization Practice
-author=AetherClaw (Night Market Intelligence)
-license=MIT
-tags=json,optimization,performance,night-market,intelligence,openclaw,automation,one-click
-repository=$REPO_URL
-homepage=$REPO_URL
-installation_date=$(date '+%Y-%m-%d')
-installation_method=one-click
-installation_version=1.0
-EOF
-    
-    # Make scripts executable
-    chmod +x *.sh 2>/dev/null || true
-    chmod +x src/*.sh 2>/dev/null || true
-    
-    success "Configuration files created"
-}
-
-# Verify installation
-verify_installation() {
-    log "🧪 Verifying installation..."
-    
-    cd "$INSTALL_DIR" || error "Failed to enter installation directory"
-    
-    # Check if skill appears in OpenClaw
-    log "Checking OpenClaw skill registration..."
-    if openclaw skills list | grep -q "aethercore"; then
-        success "AetherCore registered in OpenClaw"
-    else
-        warning "AetherCore not found in OpenClaw skills list (may need restart)"
+        error "Neither curl nor wget found. Please install one of them."
     fi
     
-    # Run simple tests
-    if [ -f "run_simple_tests.py" ]; then
-        log "Running simple tests..."
-        python3 run_simple_tests.py 2>&1 | tail -20 | tee -a "$LOG_FILE"
+    # Make executable and run
+    chmod +x "$installer_path"
+    log "Executing $platform-optimized installer..."
+    echo ""
+    exec "$installer_path"
+}
+
+# Show platform detection results
+show_platform_info() {
+    local detection_result=$(detect_os_with_details)
+    local platform=$(echo "$detection_result" | cut -d'|' -f1)
+    local details=$(echo "$detection_result" | cut -d'|' -f2)
+    
+    echo ""
+    highlight "Platform Detection Results:"
+    echo "  🔍 Detected: $platform"
+    echo "  📋 Details: $details"
+    echo "  🚀 Installer: $(echo "$platform" | tr '[:upper:]' '[:lower:]')-optimized"
+    echo ""
+    
+    case "$platform" in
+        macOS)
+            info "🍎 macOS-optimized features:"
+            echo "  • Uses rsync/tar for efficient file copying"
+            echo "  • Handles .DS_Store files automatically"
+            echo "  • Includes macOS-specific configurations"
+            echo "  • Checks for Homebrew and Xcode tools"
+            ;;
+        Linux)
+            info "🐧 Linux-optimized features:"
+            echo "  • Uses GNU cp --parents for maximum efficiency"
+            echo "  • Detects Linux distribution automatically"
+            echo "  • Sets secure Unix permissions (755/644)"
+            echo "  • Creates systemd service file if available"
+            ;;
+        *)
+            info "🌐 Universal installation features:"
+            echo "  • Cross-platform compatibility"
+            echo "  • Simple and reliable file copying"
+            echo "  • Works on any Unix-like system"
+            echo "  • Includes basic error handling"
+            ;;
+    esac
+    echo ""
+}
+
+# Main installation router
+main() {
+    # Show welcome message
+    highlight "Welcome to AetherCore v3.3.0 Smart Installation!"
+    echo "  🎪 Night Market Intelligence Technical Serviceization Practice"
+    echo "  🤖 Intelligent platform detection and optimization"
+    echo "  🚀 One-command installation for all platforms"
+    echo ""
+    
+    # Detect platform
+    local detection_result=$(detect_os_with_details)
+    local platform=$(echo "$detection_result" | cut -d'|' -f1)
+    local details=$(echo "$detection_result" | cut -d'|' -f2)
+    
+    # Show detection results
+    show_platform_info
+    
+    # Ask for confirmation
+    read -p "👉 Press Enter to continue with $platform-optimized installation, or Ctrl+C to cancel... "
+    echo ""
+    
+    # Download and execute appropriate installer
+    download_and_execute_installer "$platform"
+}
+
+# Handle installation options
+handle_options() {
+    # Check for help option
+    if [[ "$1" == "--help" ]] || [[ "$1" == "-h" ]]; then
+        echo ""
+        highlight "AetherCore v3.3.0 Smart Installation Help"
+        echo ""
+        echo "Usage:"
+        echo "  ./install.sh                    # Smart detection (recommended)"
+        echo "  ./install.sh --macos            # Force macOS installation"
+        echo "  ./install.sh --linux            # Force Linux installation"
+        echo "  ./install.sh --universal        # Force universal installation"
+        echo "  ./install.sh --help             # Show this help"
+        echo ""
+        echo "Platform-specific installers:"
+        echo "  install-macos.sh    - macOS-optimized installation"
+        echo "  install-linux.sh    - Linux-optimized installation"
+        echo "  install-universal.sh - Universal cross-platform installation"
+        echo ""
+        echo "One-command installation:"
+        echo "  curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/INSTALL_NOW.sh | bash"
+        echo ""
+        highlight "🎪 Night Market Intelligence Technical Serviceization Practice"
+        echo "  Simple is beautiful, reliable is king, founder satisfaction is the highest honor!"
+        echo ""
+        exit 0
     fi
     
-    # Check JSON performance
-    log "Testing JSON performance..."
-    python3 -c "
-import json, time
-data = {'test': 'AetherCore Performance', 'version': '$AETHERCORE_VERSION'}
-start = time.time()
-for _ in range(1000):
-    json.dumps(data)
-dump_time = time.time() - start
-print(f'✅ JSON Performance: {1000/dump_time:.0f} operations/second')
-" 2>&1 | tee -a "$LOG_FILE"
-    
-    success "Installation verification complete"
-}
-
-# Generate installation report
-generate_report() {
-    log "📊 Generating installation report..."
-    
-    REPORT_FILE="$INSTALL_DIR/installation_report_$(date +%Y%m%d_%H%M%S).md"
-    
-    cat > "$REPORT_FILE" << EOF
-# AetherCore v$AETHERCORE_VERSION Installation Report
-## Night Market Intelligence Technical Serviceization Practice
-
-### Installation Details
-- **Version**: $AETHERCORE_VERSION
-- **Installation Date**: $(date '+%Y-%m-%d %H:%M:%S')
-- **Installation Method**: One-Click Installation v1.0
-- **Installation Directory**: $INSTALL_DIR
-- **Log File**: $LOG_FILE
-
-### System Information
-- **Operating System**: $(uname -s) $(uname -r)
-- **Python Version**: $(python3 --version 2>/dev/null || echo "Not found")
-- **OpenClaw Version**: $(openclaw --version 2>/dev/null || echo "Not found")
-
-### Installation Steps Completed
-1. ✅ Prerequisites check
-2. ✅ Directory creation
-3. ✅ AetherCore download
-4. ✅ Dependency installation
-5. ✅ File copying
-6. ✅ Configuration setup
-7. ✅ Installation verification
-
-### Verification Results
-- OpenClaw Integration: $(if openclaw skills list | grep -q "aethercore"; then echo "✅ Registered"; else echo "⚠️ Not found (may need restart)"; fi)
-- File Structure: ✅ Complete
-- Configuration Files: ✅ Created
-- Dependencies: ✅ Installed
-
-### Performance Benchmark
-- JSON Operations: $(python3 -c "import json, time; data = {'test': 'benchmark'}; start = time.time(); [json.dumps(data) for _ in range(1000)]; print(f'{1000/(time.time()-start):.0f} ops/sec')" 2>/dev/null || echo "Test failed") operations/second
-
-### Next Steps
-1. Restart OpenClaw if AetherCore doesn't appear in skills list
-2. Run \`openclaw skill run aethercore --help\` to see available commands
-3. Configure automation: \`./CRON_SETUP.sh\`
-4. Join community: $REPO_URL
-
-### Support
-- GitHub Issues: $REPO_URL/issues
-- Documentation: $REPO_URL#readme
-
----
-**🎪 Night Market Intelligence Declaration**
-> "One-Click Installation, Infinite Possibilities"
-> "Technical Serviceization Practice Complete"
-> "From Night Market to World, From Technology to Service"
-
-Installation completed successfully! 😈🐾⚛️✨
-EOF
-    
-    success "Installation report generated: $REPORT_FILE"
-}
-
-# Cleanup temporary files
-cleanup() {
-    log "🧹 Cleaning up temporary files..."
-    
-    if [ -d "$TEMP_DIR" ]; then
-        rm -rf "$TEMP_DIR" || warning "Failed to clean up temp directory"
-    fi
-    
-    success "Cleanup complete"
-}
-
-# Main installation function
-main_installation() {
-    log "🚀 Starting AetherCore One-Click Installation..."
-    
-    # Record start time
-    START_TIME=$(date +%s)
-    
-    # Execute installation steps
-    check_prerequisites
-    create_install_dir
-    download_aethercore
-    install_dependencies
-    copy_files
-    create_config_files
-    verify_installation
-    generate_report
-    cleanup
-    
-    # Calculate installation time
-    END_TIME=$(date +%s)
-    INSTALLATION_TIME=$((END_TIME - START_TIME))
-    
-    # Final success message
-    echo ""
-    echo "============================================================"
-    echo "🎉 AetherCore v$AETHERCORE_VERSION Installation Complete!"
-    echo "============================================================"
-    echo ""
-    echo "📊 Installation Summary:"
-    echo "  ✅ Version: $AETHERCORE_VERSION"
-    echo "  ✅ Time: ${INSTALLATION_TIME} seconds"
-    echo "  ✅ Directory: $INSTALL_DIR"
-    echo "  ✅ Log File: $LOG_FILE"
-    echo ""
-    echo "🚀 Next Steps:"
-    echo "  1. Check installation: openclaw skills list | grep aethercore"
-    echo "  2. Get help: openclaw skill run aethercore --help"
-    echo "  3. Configure automation: cd $INSTALL_DIR && ./CRON_SETUP.sh"
-    echo "  4. View report: cat $INSTALL_DIR/installation_report_*.md"
-    echo ""
-    echo "🎪 Night Market Intelligence Technical Serviceization Practice"
-    echo "One-Click Installation Successfully Completed!"
-    echo ""
-    echo "😈🐾⚛️✨ Ready to create value!"
-    echo "============================================================"
+    # Check for platform override options
+    case "$1" in
+        --macos)
+            log "Forcing macOS installation (override)..."
+            download_and_execute_installer "macOS"
+            ;;
+        --linux)
+            log "Forcing Linux installation (override)..."
+            download_and_execute_installer "Linux"
+            ;;
+        --universal)
+            log "Forcing universal installation (override)..."
+            download_and_execute_installer "Unknown"
+            ;;
+        "")
+            # No arguments, use smart detection
+            main
+            ;;
+        *)
+            error "Unknown option: $1. Use --help for usage information."
+            ;;
+    esac
 }
 
 # Handle errors
 handle_error() {
     error_code=$?
-    error "Installation failed with error code $error_code"
-    echo "Check log file for details: $LOG_FILE"
+    echo ""
+    error "Smart installation failed with error code $error_code"
+    echo ""
+    echo "🔧 Troubleshooting tips:"
+    echo "  1. Check network connectivity"
+    echo "  2. Ensure you have curl or wget installed"
+    echo "  3. Try platform-specific installer directly:"
+    echo "     • macOS: curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-macos.sh | bash"
+    echo "     • Linux: curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-linux.sh | bash"
+    echo "     • Universal: curl -sSL https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/install-universal.sh | bash"
+    echo ""
     exit $error_code
 }
 
 # Set error trap
 trap handle_error ERR
 
-# Run installation
-main_installation
+# Start installation with options
+handle_options "$1"
 
-exit 0
+# This point should never be reached due to exec in download_and_execute_installer
+error "Installation failed unexpectedly"

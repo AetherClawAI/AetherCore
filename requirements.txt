@@ -1,22 +1,31 @@
-# AetherCore v3.3.0 Dependencies
-# English Version - International Release
-# Date: 2026-02-27
-# Translator: AetherClaw Night Market Intelligence
-# AetherCore v3.3 Dependencies
-# This file lists all required dependencies for AetherCore
-# Install with: pip install -r requirements.txt
-# Core JSON Performance Libraries
-orjson>=3.9.0          # Fastest JSON library (Rust implementation)
-ujson>=5.8.0           # Ultra-fast JSON library (C implementation)
-python-rapidjson>=1.10 # RapidJSON binding for Python
-# API Framework
-fastapi>=0.104.0       # High-performance API framework
-uvicorn>=0.24.0        # ASGI server for FastAPI
-pydantic>=2.0.0        # Data validation and settings management
-# Optional Development Dependencies (not required for runtime)
-# pytest>=7.0           # Testing framework
-# black>=23.0           # Code formatter
-# flake8>=6.0           # Code linter
-# mypy>=1.0             # Type checking
+# 🎪 AetherCore v3.3.0 Dependencies
+# Night Market Intelligence Technical Serviceization Practice
+
+# ========================
+# 🎯 MINIMAL DEPENDENCIES
+# ========================
+# Only the essential dependencies for basic functionality
+# This is the minimal set for most users
+
+orjson>=3.9.0              # High-performance JSON parsing (REQUIRED)
+
+# ========================
+# 📦 RECOMMENDED DEPENDENCIES
+# ========================
+# Uncomment these lines for enhanced performance and features
+# ujson>=5.8.0               # UltraJSON for additional performance
+# python-rapidjson>=1.10     # RapidJSON bindings for extreme speed
+
+# ========================
+# ℹ️ INSTALLATION NOTES
+# ========================
+# For full feature set, use requirements-optimized.txt
+# For minimal installation, only orjson is required
+
+# Installation commands:
+# 1. Minimal: pip install orjson>=3.9.0
+# 2. Recommended: pip install -r requirements.txt
+# 3. Full: pip install -r requirements-optimized.txt
+
 # Night Market Intelligence Technical Serviceization Practice
 # Simple is beautiful, reliable is king, founder satisfaction is the highest honor!

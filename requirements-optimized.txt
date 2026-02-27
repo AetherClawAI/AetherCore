@@ -1,0 +1,49 @@
+# 🎪 AetherCore v3.3.0 Optimized Dependencies
+# Night Market Intelligence Technical Serviceization Practice
+
+# ========================
+# 🎯 CORE DEPENDENCIES (Required)
+# ========================
+# Essential dependencies for basic functionality
+orjson>=3.9.0              # High-performance JSON parsing (required)
+
+# ========================
+# ⚡ PERFORMANCE ENHANCEMENT (Optional but recommended)
+# ========================
+# Additional JSON libraries for maximum performance
+ujson>=5.8.0               # UltraJSON for additional performance
+python-rapidjson>=1.10     # RapidJSON bindings for extreme speed
+
+# ========================
+# 🌐 API SERVER (Optional)
+# ========================
+# For REST API and web interface
+fastapi>=0.104.0           # Modern, fast web framework
+uvicorn>=0.24.0            # ASGI server for FastAPI
+pydantic>=2.5.0            # Data validation and settings management
+
+# ========================
+# 📊 MONITORING & METRICS (Optional)
+# ========================
+# For performance monitoring and metrics
+prometheus-client>=0.17.0  # Prometheus metrics exporter
+psutil>=5.9.0              # System and process utilities
+
+# ========================
+# 🔧 DEVELOPMENT & TESTING (Development only)
+# ========================
+# Dependencies for development and testing
+pytest>=7.4.0              # Testing framework
+pytest-cov>=4.1.0          # Test coverage
+black>=23.0.0              # Code formatting
+flake8>=6.1.0              # Code linting
+mypy>=1.6.0                # Static type checking
+
+# ========================
+# 📁 UTILITIES (Optional)
+# ========================
+# Additional utilities for enhanced functionality
+python-dateutil>=2.8.2     # Date/time utilities
+pyyaml>=6.0                # YAML parsing
+colorama>=0.4.6            # Cross-platform colored terminal text
+tqdm>=4.66.0               # Progress bars for long operations

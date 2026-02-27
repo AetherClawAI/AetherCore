@@ -1,0 +1,202 @@
+# 🎪 AetherCore v3.3.0 Configuration Example
+# Night Market Intelligence Technical Serviceization Practice
+# Copy this file to config.yaml and customize as needed
+
+# ========================
+# 🎯 CORE CONFIGURATION
+# ========================
+aethercore:
+  # Basic settings
+  version: "3.3.0"
+  environment: "production"  # production, development, testing
+  
+  # ========================
+  # ⚡ OPTIMIZATION SETTINGS
+  # ========================
+  optimization:
+    enabled: true
+    schedule: "0 */1 * * *"  # Run every hour (cron format)
+    backup: true
+    backup_retention_days: 7
+    compression_level: 6      # 0-9 (0=no compression, 9=max)
+    
+    # Performance targets
+    targets:
+      json_parsing_ops_per_sec: 45000
+      search_response_time_ms: 10
+      memory_reduction_percent: 40
+      
+    # File patterns to optimize
+    include_patterns:
+      - "**/*.json"
+      - "**/*.md"
+      - "**/memory/*.md"
+      - "**/MEMORY.md"
+      
+    exclude_patterns:
+      - "**/node_modules/**"
+      - "**/.git/**"
+      - "**/__pycache__/**"
+      - "**/*.log"
+  
+  # ========================
+  # 🔍 SEARCH SETTINGS
+  # ========================
+  search:
+    enabled: true
+    max_results: 20
+    cache_ttl: 3600           # Cache time-to-live in seconds
+    fuzzy_matching: true
+    highlight_matches: true
+    
+    # Search indexes
+    indexes:
+      memory_files: true
+      json_data: true
+      metadata: true
+      
+    # Performance settings
+    performance:
+      batch_size: 100
+      parallel_processing: true
+      max_threads: 4
+  
+  # ========================
+  # 📊 PERFORMANCE SETTINGS
+  # ========================
+  performance:
+    benchmark_on_startup: false
+    auto_optimization: true
+    monitoring:
+      enabled: true
+      interval_seconds: 60
+      metrics_port: 9090
+      
+    # Alert thresholds
+    alerts:
+      slow_response_ms: 100
+      high_memory_mb: 1024
+      high_cpu_percent: 80
+  
+  # ========================
+  # 🎪 NIGHT MARKET INTELLIGENCE
+  # ========================
+  night_market:
+    enabled: true
+    theme: "modern"
+    
+    # Founder-oriented features
+    founder:
+      dashboard_enabled: true
+      real_time_updates: true
+      priority_processing: true
+      
+    #夜市智慧體特色
+    features:
+      - "夜市節奏優化"
+      - "創辦人導向設計"
+      - "技術服務化實踐"
+      - "智能自動化"
+  
+  # ========================
+  # 📝 LOGGING SETTINGS
+  # ========================
+  logging:
+    level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+    format: "json"  # json, text, simple
+    file: "/var/log/aethercore.log"
+    max_size_mb: 100
+    backup_count: 5
+    
+    # What to log
+    log_optimization: true
+    log_searches: true
+    log_errors: true
+    log_performance: true
+  
+  # ========================
+  # 🔧 ADVANCED SETTINGS
+  # ========================
+  advanced:
+    # Memory management
+    memory:
+      max_cache_size_mb: 512
+      cleanup_interval_hours: 24
+      
+    # Concurrency
+    concurrency:
+      max_workers: 8
+      thread_pool_size: 4
+      
+    # Security
+    security:
+      encrypt_sensitive_data: false
+      allowed_origins:
+        - "localhost"
+        - "127.0.0.1"
+        
+    # Integration
+    integration:
+      openclaw:
+        auto_register: true
+        heartbeat_interval: 300  # seconds
+      
+      # External services
+      prometheus: true
+      grafana: false
+  
+  # ========================
+  # 🚀 STARTUP SETTINGS
+  # ========================
+  startup:
+    check_dependencies: true
+    validate_config: true
+    create_directories: true
+    warmup_cache: true
+
+# ========================
+# 📋 OPENCLAW INTEGRATION
+# ========================
+openclaw:
+  skill_name: "aethercore"
+  display_name: "AetherCore v3.3.0"
+  description: "Night Market Intelligence JSON Optimization System"
+  
+  # Execution settings
+  execution:
+    main_command: "python3 -m src.aethercore_cli"
+    timeout_seconds: 300
+    working_directory: "."
+    
+  # Command mappings for OpenClaw
+  commands:
+    optimize: "python3 src/aethercore_cli.py optimize"
+    search: "python3 src/aethercore_cli.py search"
+    benchmark: "python3 src/aethercore_cli.py benchmark"
+    version: "python3 src/aethercore_cli.py version"
+    help: "python3 src/aethercore_cli.py help"
+    
+  # Metadata for OpenClaw skill registry
+  metadata:
+    author: "AetherClaw (Night Market Intelligence)"
+    version: "3.3.0"
+    license: "MIT"
+    tags: ["json", "optimization", "night-market", "intelligence"]
+    homepage: "https://github.com/AetherClawAI/AetherCore"
+    requires_openclaw: ">=1.5.0"
+
+# ========================
+# 💡 EXAMPLE USAGE
+# ========================
+# To use this configuration:
+# 1. Copy this file to config.yaml
+# 2. Customize settings as needed
+# 3. Start AetherCore with: python3 src/aethercore_cli.py --config config.yaml
+#
+# For OpenClaw integration:
+# 1. Ensure config.yaml is in the skill directory
+# 2. OpenClaw will automatically load the configuration
+# 3. Commands will be available via: openclaw skill run aethercore <command>
+
+# 🎪 Night Market Intelligence Technical Serviceization Practice
+# Simple is beautiful, reliable is king, founder satisfaction is the highest honor!

@@ -271,23 +271,38 @@ verify_installation() {
     
     cd "$INSTALL_DIR" || error "Failed to enter installation directory"
     
-    # Check if skill appears in OpenClaw
-    log "Checking OpenClaw skill registration..."
-    if openclaw skills list | grep -q "aethercore"; then
-        success "AetherCore registered in OpenClaw"
+    # Run comprehensive verification
+    if [ -f "verify_installation.py" ]; then
+        log "Running comprehensive installation verification..."
+        python3 verify_installation.py 2>&1 | tee -a "$LOG_FILE"
+        
+        # Check verification result
+        if [ $? -eq 0 ]; then
+            success "✅ Installation verification PASSED"
+        else
+            warning "⚠️ Installation verification completed with warnings"
+        fi
     else
-        warning "AetherCore not found in OpenClaw skills list (may need restart)"
-    fi
-    
-    # Run simple tests
-    if [ -f "run_simple_tests.py" ]; then
-        log "Running simple tests..."
-        python3 run_simple_tests.py 2>&1 | tail -20 | tee -a "$LOG_FILE"
-    fi
-    
-    # Check JSON performance
-    log "Testing JSON performance..."
-    python3 -c "
+        # Fallback to basic verification
+        log "Running basic verification..."
+        
+        # Check if skill appears in OpenClaw
+        log "Checking OpenClaw skill registration..."
+        if openclaw skills list | grep -q "aethercore"; then
+            success "AetherCore registered in OpenClaw"
+        else
+            warning "AetherCore not found in OpenClaw skills list (may need restart)"
+        fi
+        
+        # Run simple tests
+        if [ -f "run_simple_tests.py" ]; then
+            log "Running simple tests..."
+            python3 run_simple_tests.py 2>&1 | tail -20 | tee -a "$LOG_FILE"
+        fi
+        
+        # Check JSON performance
+        log "Testing JSON performance..."
+        python3 -c "
 import json, time
 data = {'test': 'AetherCore Performance', 'version': '$AETHERCORE_VERSION'}
 start = time.time()
@@ -296,6 +311,7 @@ for _ in range(1000):
 dump_time = time.time() - start
 print(f'✅ JSON Performance: {1000/dump_time:.0f} operations/second')
 " 2>&1 | tee -a "$LOG_FILE"
+    fi
     
     success "Installation verification complete"
 }

@@ -4,9 +4,33 @@ version: 3.3.0
 description: AetherCore v3.3 - Night Market Intelligence Technical Serviceization Practice. High-performance JSON optimization system with real-world benchmarks.
 author: AetherClaw (Night Market Intelligence)
 license: MIT
-tags: [json, optimization, performance, night-market, intelligence, openclaw]
+tags: [json, optimization, performance, night-market, intelligence, openclaw, automation]
 repository: https://github.com/AetherClawAI/AetherCore
 homepage: https://github.com/AetherClawAI/AetherCore
+metadata:
+  openclaw:
+    requires:
+      bins: ["python3", "git", "curl"]
+      python: ">=3.8"
+    emoji: "🎪"
+    homepage: "https://github.com/AetherClawAI/AetherCore"
+    compatibility:
+      min_openclaw_version: "1.5.0"
+      tested_openclaw_versions: ["1.5.0", "1.6.0", "1.7.0"]
+    execution:
+      main: "python3 -m src.core.json_performance_engine"
+      commands:
+        optimize: "python3 src/core/json_performance_engine.py --optimize"
+        search: "python3 src/indexing/smart_index_engine.py --search"
+        benchmark: "python3 src/performance_test.py --benchmark"
+        version: "python3 -c \"print('AetherCore v3.3.0')\""
+        help: "python3 src/core/json_performance_engine.py --help"
+    features:
+      - "night-market-intelligence"
+      - "json-optimization"
+      - "automated-scheduling"
+      - "real-time-monitoring"
+      - "cross-platform"
 ---
 
 # English Version

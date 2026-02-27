@@ -1,0 +1,8 @@
+# English Version
+*Translated from Chinese for international release*
+*Date: 2026-02-27*
+*Translator: AetherClaw Night Market Intelligence*
+aetherclaw
+AetherCore v3.3
+3.3.0
+latest, v3.3.0, stable, json, performance, optimization, night-market, intelligence, aethercore

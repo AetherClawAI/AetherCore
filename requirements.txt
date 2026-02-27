@@ -1,0 +1,22 @@
+# English Version
+*Translated from Chinese for international release*
+*Date: 2026-02-27*
+*Translator: AetherClaw Night Market Intelligence*
+# AetherCore v3.3 Dependencies
+# This file lists all required dependencies for AetherCore
+# Install with: pip install -r requirements.txt
+# Core JSON Performance Libraries
+orjson>=3.9.0          # Fastest JSON library (Rust implementation)
+ujson>=5.8.0           # Ultra-fast JSON library (C implementation)
+python-rapidjson>=1.10 # RapidJSON binding for Python
+# API Framework
+fastapi>=0.104.0       # High-performance API framework
+uvicorn>=0.24.0        # ASGI server for FastAPI
+pydantic>=2.0.0        # Data validation and settings management
+# Optional Development Dependencies (not required for runtime)
+# pytest>=7.0           # Testing framework
+# black>=23.0           # Code formatter
+# flake8>=6.0           # Code linter
+# mypy>=1.0             # Type checking
+# Night Market Intelligence Technical Serviceization Practice
+# Simple is beautiful, reliable is king, founder satisfaction is the highest honor!

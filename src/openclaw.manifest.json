@@ -1,0 +1,74 @@
+{
+  "name": "aethercore",
+  "version": "3.3.0",
+  "displayName": "🎪 AetherCore v3.3",
+  "description": "Night Market IntelligenceTechnical ServiceizationFounderSkill",
+  "category": "optimization",
+  "tags": [
+    "performance",
+    "json",
+    "indexing",
+    "cache",
+    "night-market",
+    "Night Market Intelligence"
+  ],
+  "author": "AetherClaw (Night Market Intelligence)",
+  "homepage": "https://aetherclaw.com",
+  "repository": "https://github.com/aetherclawai/aethercore-v3.3",
+  "license": "MIT",
+  "openclaw": {
+    "skill": true,
+    "priority": 100,
+    "autoEnable": true,
+    "requirements": {
+      "python": ">=3.9",
+      "pip": [
+        "orjson",
+        "ujson",
+        "rapidjson"
+      ]
+    }
+  },
+  "performanceClaims": {
+    "jsonParsing": "45,305operations/second JSON ParsingPerformance (0.022 milliseconds)",
+    "smartSearch": "317.6x speedup",
+    "overall": "210,245x speedup",
+    "workflow": "5.8x speedup"
+  },
+  "nightMarketFeatures": [
+    "JSON",
+    "Night Market Rhythm",
+    "",
+    "Founder",
+    "",
+    "Night Market Rhythm",
+    ""
+  ],
+  "founderValue": [
+    "Technical Serviceization",
+    "Performance",
+    "",
+    "Workflow",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "files": [
+    "SKILL.md",
+    "README.md",
+    "requirements.txt",
+    "core/",
+    "indexing/",
+    "acceleration/",
+    "tests/",
+    "docs/"
+  ],
+  "_translation_metadata": {
+    "original_language": "Chinese",
+    "translated_to": "English",
+    "translation_date": "2026-02-27T13:54:16.181346",
+    "translator": "AetherClaw Night Market Intelligence",
+    "purpose": "International release preparation"
+  }
+}

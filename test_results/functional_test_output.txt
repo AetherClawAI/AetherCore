@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/Users/aibot/.openclaw/workspace/aethercore-github-release/tests/test_functional.py", line 9, in <module>
+    import pytest
+ModuleNotFoundError: No module named 'pytest'

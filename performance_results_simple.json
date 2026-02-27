@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-02-27T13:10:45.915339",
+  "version": "3.3.0",
+  "results": {
+    "json_parsing": {
+      "test_name": "json_parsing_speed",
+      "iterations": 50,
+      "json_avg_ms": 0.074,
+      "xml_avg_ms": 0.9,
+      "speedup": 12.1,
+      "speedup_achieved": false
+    },
+    "search_performance": {
+      "test_name": "search_performance",
+      "iterations": 30,
+      "linear_avg_ms": 0.021,
+      "smart_avg_ms": 0.0,
+      "speedup": 133.3,
+      "speedup_achieved": false
+    },
+    "workflow_performance": {
+      "test_name": "workflow_performance",
+      "iterations": 20,
+      "traditional_avg_ms": 0.632,
+      "aethercore_avg_ms": 0.139,
+      "speedup": 4.5,
+      "speedup_achieved": false
+    }
+  },
+  "overall": {
+    "total_speedup": 19.4,
+    "target_speedup": 210245,
+    "target_achieved": false,
+    "all_passed": false
+  },
+  "_translation_metadata": {
+    "original_language": "Chinese",
+    "translated_to": "English",
+    "translation_date": "2026-02-27T13:54:16.127286",
+    "translator": "AetherClaw Night Market Intelligence",
+    "purpose": "International release preparation"
+  }
+}

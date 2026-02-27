@@ -1,0 +1,36 @@
+{
+  "v3.0": {
+    "": "2026-02-14 19:24:49",
+    "": "TestingComplete",
+    "": "Philip",
+    "": {
+      "Python": "3.9.6 (default, Dec  2 2025, 07:27:58) \n[Clang 17.0.0 (clang-1700.6.3.2)]",
+      "": "/Users/aibot/.openclaw/workspace/context-optimization-v2",
+      "": "posix"
+    },
+    "": {
+      "": "✅ ",
+      "": "Performance (orjson/ujson/rapidjson)",
+      "": "1.  2.  3. ",
+      "": "Performance"
+    },
+    "": {
+      "JSON-only": "✅ Implement",
+      "": "✅ Implement ()",
+      "": "🔄 CompleteImplement",
+      "": "🔄 CompleteImplement"
+    },
+    "": {
+      "": "✅ JSON-only",
+      "": "✅ Stable",
+      "": "✅ Performance"
+    }
+  },
+  "_translation_metadata": {
+    "original_language": "Chinese",
+    "translated_to": "English",
+    "translation_date": "2026-02-27T13:54:16.180870",
+    "translator": "AetherClaw Night Market Intelligence",
+    "purpose": "International release preparation"
+  }
+}

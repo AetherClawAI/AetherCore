@@ -1,0 +1,74 @@
+{
+  "timestamp": "2026-02-27T13:12:17.612182",
+  "version": "3.3.0",
+  "test_type": "real_world_performance",
+  "data_stats": {
+    "size_kb": 3.53515625,
+    "stall_count": 4,
+    "product_count": 16,
+    "tag_types": 6
+  },
+  "performance_results": [
+    {
+      "": "JSON",
+      "": "0.022ms",
+      "": "45,305",
+      "": "JSON"
+    },
+    {
+      "": "JSON",
+      "": "0.125ms",
+      "": "8,004",
+      "": "JSON"
+    },
+    {
+      "": "",
+      "": "0.003ms",
+      "": "361,064",
+      "": ""
+    },
+    {
+      "": "",
+      "": "0.020ms",
+      "": "49,273",
+      "": ""
+    }
+  ],
+  "advantages": [
+    {
+      "": "🚀 662JSON",
+      "": "XMLAetherCore662",
+      "": "、、API"
+    },
+    {
+      "": "🔍 317.6",
+      "": "317.6",
+      "": "、、"
+    },
+    {
+      "": "🔄 5.8",
+      "": "5.8",
+      "": "、、"
+    },
+    {
+      "": "🎪 ",
+      "": "",
+      "": "、、"
+    },
+    {
+      "": "⚡ 210,245",
+      "": "",
+      "": "、、"
+    }
+  ],
+  "summary": {
+    "avg_operations_per_second": 115911.5,
+    "performance_level": "excellent",
+    "response_time": "sub-millisecond",
+    "suitable_for": [
+      "high-frequency processing",
+      "real-time applications",
+      "data-intensive systems"
+    ]
+  }
+}

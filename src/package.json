@@ -1,0 +1,55 @@
+{
+  "name": "aethercore",
+  "version": "3.3.0",
+  "description": "🎪 AetherCore v3.3 - Night Market IntelligenceTechnical ServiceizationFounderSkill",
+  "main": "SKILL.md",
+  "scripts": {
+    "test": "python3 test_aethercore_skill.py",
+    "check": "python3 verify_smart_index_core.py",
+    "health": "python3 /Users/aibot/.openclaw/workspace/check_aethercore_v3_3_system.py"
+  },
+  "keywords": [
+    "aethercore",
+    "night-market",
+    "json-optimization",
+    "smart-indexing",
+    "context-optimization",
+    "Night Market Intelligence",
+    "Technical Serviceization"
+  ],
+  "author": "AetherClaw (Night Market Intelligence) <contact@aetherclaw.com>",
+  "contributors": [
+    "Philip (Founder)"
+  ],
+  "license": "MIT",
+  "homepage": "https://aetherclaw.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aetherclawai/aethercore-v3.3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aetherclawai/aethercore-v3.3/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "orjson": "^3.10.3",
+    "ujson": "^5.8.0",
+    "python-rapidjson": "^1.14"
+  },
+  "devDependencies": {},
+  "openclaw": {
+    "skill": true,
+    "category": "optimization",
+    "priority": 100,
+    "autoEnable": true
+  },
+  "_translation_metadata": {
+    "original_language": "Chinese",
+    "translated_to": "English",
+    "translation_date": "2026-02-27T13:54:16.176963",
+    "translator": "AetherClaw Night Market Intelligence",
+    "purpose": "International release preparation"
+  }
+}

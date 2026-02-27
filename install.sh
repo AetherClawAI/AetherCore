@@ -155,28 +155,107 @@ copy_files() {
     # Ensure we're in the temp directory
     cd "$TEMP_DIR" || error "Failed to enter temp directory for file copying"
     
-    # Simple and reliable cross-platform copying
-    # Use cp -R for recursive copying (works on both macOS and Linux)
-    log "Using simple recursive copy for cross-platform compatibility..."
+    # Detect operating system for cross-platform compatibility
+    detect_os_and_copy() {
+        local os_type=$(uname -s)
+        
+        case "$os_type" in
+            Darwin)
+                log "🖥️  Detected macOS (Darwin) - using macOS compatible copy method..."
+                copy_for_macos
+                ;;
+            Linux)
+                log "🐧 Detected Linux - using Linux optimized copy method..."
+                copy_for_linux
+                ;;
+            *)
+                log "🌐 Detected unknown OS ($os_type) - using universal fallback method..."
+                copy_universal_fallback
+                ;;
+        esac
+    }
     
-    # Copy all files and directories except .git
-    if cp -R . "$INSTALL_DIR" 2>/dev/null; then
-        # Remove .git directory if it was copied
-        rm -rf "$INSTALL_DIR/.git" 2>/dev/null || true
-    else
-        # Fallback: copy files individually
-        warning "Recursive copy failed, using fallback method..."
-        # Create all directories first
-        find . -type d -not -name ".git" -not -path "./.git/*" | while read dir; do
-            mkdir -p "$INSTALL_DIR/$dir" 2>/dev/null || true
-        done
-        # Copy all files
-        find . -type f -not -path "./.git/*" | while read file; do
-            cp "$file" "$INSTALL_DIR/$file" 2>/dev/null || true
+    # macOS specific copy (BSD cp)
+    copy_for_macos() {
+        # macOS cp doesn't support --parents, use tar or rsync if available
+        if command -v rsync &> /dev/null; then
+            log "Using rsync (best for macOS)..."
+            rsync -av --exclude='.git' --exclude='.git/*' . "$INSTALL_DIR/" 2>/dev/null || copy_universal_fallback
+        elif command -v tar &> /dev/null; then
+            log "Using tar (good for macOS)..."
+            tar cf - --exclude='.git' --exclude='.git/*' . | (cd "$INSTALL_DIR" && tar xf -) 2>/dev/null || copy_universal_fallback
+        else
+            log "Using cp -R with manual .git removal (fallback for macOS)..."
+            cp -R . "$INSTALL_DIR" 2>/dev/null
+            rm -rf "$INSTALL_DIR/.git" 2>/dev/null || true
+        fi
+    }
+    
+    # Linux specific copy (GNU cp)
+    copy_for_linux() {
+        # Linux cp supports --parents, use it for efficiency
+        if cp --version 2>/dev/null | grep -q "GNU coreutils"; then
+            log "Using GNU cp with --parents (most efficient for Linux)..."
+            find . -type f -not -path "./.git/*" -exec cp --parents {} "$INSTALL_DIR" \; 2>/dev/null || copy_universal_fallback
+        else
+            # Some Linux distributions might have different cp
+            copy_universal_fallback
+        fi
+    }
+    
+    # Universal fallback method (works on all platforms)
+    copy_universal_fallback() {
+        log "Using universal fallback copy method..."
+        # Create directory structure
+        find . -type d -not -name ".git" -not -path "./.git/*" -exec mkdir -p "$INSTALL_DIR/{}" \; 2>/dev/null
+        # Copy files
+        find . -type f -not -path "./.git/*" -exec cp {} "$INSTALL_DIR/{}" \; 2>/dev/null
+    }
+    
+    # Execute OS-detected copy method
+    detect_os_and_copy
+    
+    # Verify critical files were copied
+    verify_critical_files
+    
+    success "Files copied to $INSTALL_DIR"
+}
+
+# Verify critical files were copied successfully
+verify_critical_files() {
+    log "🔍 Verifying critical files were copied..."
+    
+    local critical_files=("SKILL.md" "README.md" "clawhub.json" "requirements.txt")
+    local missing_files=()
+    
+    for file in "${critical_files[@]}"; do
+        if [ ! -f "$INSTALL_DIR/$file" ]; then
+            missing_files+=("$file")
+            warning "Critical file missing: $file"
+        fi
+    done
+    
+    if [ ${#missing_files[@]} -gt 0 ]; then
+        log "🔄 Attempting to download missing critical files from GitHub..."
+        for file in "${missing_files[@]}"; do
+            log "Downloading $file from GitHub..."
+            curl -sSL "https://raw.githubusercontent.com/AetherClawAI/AetherCore/main/$file" -o "$INSTALL_DIR/$file" 2>/dev/null || warning "Failed to download $file"
         done
     fi
     
-    success "Files copied to $INSTALL_DIR"
+    # Final verification
+    local final_missing=()
+    for file in "${critical_files[@]}"; do
+        if [ ! -f "$INSTALL_DIR/$file" ]; then
+            final_missing+=("$file")
+        fi
+    done
+    
+    if [ ${#final_missing[@]} -gt 0 ]; then
+        error "Critical files still missing after recovery: ${final_missing[*]}"
+    else
+        log "✅ All critical files verified"
+    fi
 }
 
 # Create configuration files

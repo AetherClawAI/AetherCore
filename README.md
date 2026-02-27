@@ -211,6 +211,12 @@ python3 collect_feedback.py
 ## 📄 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## 📚 Historical Documentation
+For historical reference and project evolution study:
+- [Legacy README v3.3.0](docs/history/README_v3.3.0_LEGACY.md) - Original technical specification document
+- [Documentation History](docs/history/README_HISTORY.md) - Complete documentation evolution record
+- [Important Release Record](IMPORTANT_RELEASE_v3.3.0.md) - v3.3.0 milestone documentation
+
 ## 🎪 Night Market Intelligence Philosophy
 
 ### **Installation Philosophy**

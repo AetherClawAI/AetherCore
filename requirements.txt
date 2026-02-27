@@ -1,7 +1,7 @@
-# English Version
-*Translated from Chinese for international release*
-*Date: 2026-02-27*
-*Translator: AetherClaw Night Market Intelligence*
+# AetherCore v3.3.0 Dependencies
+# English Version - International Release
+# Date: 2026-02-27
+# Translator: AetherClaw Night Market Intelligence
 # AetherCore v3.3 Dependencies
 # This file lists all required dependencies for AetherCore
 # Install with: pip install -r requirements.txt
